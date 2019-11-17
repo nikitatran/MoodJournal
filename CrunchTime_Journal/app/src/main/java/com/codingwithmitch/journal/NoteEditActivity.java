@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.codingwithmitch.journal.models.Note;
 import com.codingwithmitch.journal.database.NoteRepository;
+import com.codingwithmitch.journal.util.ParallelDotsApi;
 import com.codingwithmitch.journal.util.Utility;
 
 public class NoteEditActivity extends AppCompatActivity implements
@@ -44,7 +45,8 @@ public class NoteEditActivity extends AppCompatActivity implements
     private int mMode;
     private NoteRepository mNoteRepository;
     private Note mNoteFinal;
-
+    //Api Call
+    ParallelDotsApi api = new ParallelDotsApi ();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,7 @@ public class NoteEditActivity extends AppCompatActivity implements
         }
     }
 
+    //Save Changes either changes based if it's a new note or a note that's been updated
     private void saveChanges(){
         if(mIsNewNote){
             saveNewNote();
@@ -166,6 +169,8 @@ public class NoteEditActivity extends AppCompatActivity implements
             String timestamp = Utility.getCurrentEpochMilli();
             mNoteFinal.setTimestamp(timestamp);
 
+
+
             Log.d(TAG, "disableEditMode: initial: " + mNoteInitial.toString());
             Log.d(TAG, "disableEditMode: final: " + mNoteFinal.toString());
 
@@ -173,6 +178,20 @@ public class NoteEditActivity extends AppCompatActivity implements
             if(!mNoteFinal.getContent().equals(mNoteInitial.getContent())
                     || !mNoteFinal.getTitle().equals(mNoteInitial.getTitle())){
                 Log.d(TAG, "disableEditMode: called?");
+
+
+                //Send the updated contents as a String
+                api.apiCall (mNoteFinal.getContent ());
+
+                // TODO: Save the results of the API call to the Database
+                //Something like below to set the contents of the emotions
+                //mNoteFinal.setContent(mLinedEditText.getText().toString());
+                mNoteFinal.setAngry (api.getdAngry ());
+                mNoteFinal.setBored (api.getdBored ());
+                mNoteFinal.setExcited (api.getdExcited ());
+                mNoteFinal.setHappy (api.getdHappy ());
+                mNoteFinal.setFear (api.getdFear ());
+                mNoteFinal.setSad (api.getdSad ());
                 saveChanges();
             }
         }
