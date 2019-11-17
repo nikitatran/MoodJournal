@@ -170,7 +170,6 @@ public class NoteEditActivity extends AppCompatActivity implements
             mNoteFinal.setTimestamp(timestamp);
 
 
-
             Log.d(TAG, "disableEditMode: initial: " + mNoteInitial.toString());
             Log.d(TAG, "disableEditMode: final: " + mNoteFinal.toString());
 
@@ -186,12 +185,20 @@ public class NoteEditActivity extends AppCompatActivity implements
                 // TODO: Save the results of the API call to the Database
                 //Something like below to set the contents of the emotions
                 //mNoteFinal.setContent(mLinedEditText.getText().toString());
+                Log.d("disableEditMode:anger: ",api.getdAngry ()+"" );
+                Log.d("disableEditMode:bored: ",api.getdBored ()+"" );
+                Log.d("disableEditMode:happy: ",api.getdHappy ()+"" );
+                Log.d("disableEditMode:excit: ",api.getdExcited ()+"" );
+                Log.d("disableEditMode:fear: ",api.getdFear ()+"" );
+                Log.d("disableEditMode:sad: ",api.getdSad ()+"" );
                 mNoteFinal.setAngry (api.getdAngry ());
                 mNoteFinal.setBored (api.getdBored ());
                 mNoteFinal.setExcited (api.getdExcited ());
                 mNoteFinal.setHappy (api.getdHappy ());
                 mNoteFinal.setFear (api.getdFear ());
                 mNoteFinal.setSad (api.getdSad ());
+
+                Log.d(TAG, "disableEditMode: final: " + mNoteFinal.toString());
                 saveChanges();
             }
         }

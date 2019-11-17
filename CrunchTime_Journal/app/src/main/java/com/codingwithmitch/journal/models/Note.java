@@ -140,6 +140,12 @@ public class Note implements Parcelable {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", timestamp='" + timestamp + '\'' +
+                ", bored='" + bored + '\'' +
+                ", angry='" + angry + '\'' +
+                ", sad='" + sad + '\'' +
+                ", fear='" + fear + '\'' +
+                ", happy='" + happy + '\'' +
+                ", excited='" + excited + '\'' +
                 '}';
     }
 
