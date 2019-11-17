@@ -176,30 +176,13 @@ public class NoteEditActivity extends AppCompatActivity implements
             // If the note was altered, save it.
             if(!mNoteFinal.getContent().equals(mNoteInitial.getContent())
                     || !mNoteFinal.getTitle().equals(mNoteInitial.getTitle())){
-                Log.d(TAG, "disableEditMode: called?");
+                Log.d(TAG, "disableEditMode: saving edited note");
 
-
-                //Send the updated contents as a String
-                api.apiCall (mNoteFinal.getContent ());
-
-                // TODO: Save the results of the API call to the Database
-                //Something like below to set the contents of the emotions
-                //mNoteFinal.setContent(mLinedEditText.getText().toString());
-                Log.d("disableEditMode:anger: ",api.getdAngry ()+"" );
-                Log.d("disableEditMode:bored: ",api.getdBored ()+"" );
-                Log.d("disableEditMode:happy: ",api.getdHappy ()+"" );
-                Log.d("disableEditMode:excit: ",api.getdExcited ()+"" );
-                Log.d("disableEditMode:fear: ",api.getdFear ()+"" );
-                Log.d("disableEditMode:sad: ",api.getdSad ()+"" );
-                mNoteFinal.setAngry (api.getdAngry ());
-                mNoteFinal.setBored (api.getdBored ());
-                mNoteFinal.setExcited (api.getdExcited ());
-                mNoteFinal.setHappy (api.getdHappy ());
-                mNoteFinal.setFear (api.getdFear ());
-                mNoteFinal.setSad (api.getdSad ());
-
-                Log.d(TAG, "disableEditMode: final: " + mNoteFinal.toString());
                 saveChanges();
+                //^ ensures a row exists for this entry
+                //then set the emotion column values
+                api.setNote(mNoteFinal, mNoteRepository); //pass in the note so it knows which row in database to update
+                api.apiCall(mNoteFinal.getContent()); //start api call
             }
         }
     }
