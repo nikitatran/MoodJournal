@@ -16,6 +16,7 @@ public abstract class NoteDatabase extends RoomDatabase {
 
     private static NoteDatabase instance;
 
+    /*
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
@@ -38,14 +39,14 @@ public abstract class NoteDatabase extends RoomDatabase {
                     + " ADD COLUMN excited REAL NOT NULL DEFAULT 0");
         }
     };
-
+*/
     static NoteDatabase getInstance(final Context context){
         if(instance == null){
             instance = Room.databaseBuilder(
                     context.getApplicationContext(),
                     NoteDatabase.class,
                     DATABASE_NAME
-            ).addMigrations(MIGRATION_1_2)
+            )//.addMigrations(MIGRATION_1_2)
                     .build();
         }
         return instance;
