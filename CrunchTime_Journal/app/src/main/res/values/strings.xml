@@ -4,6 +4,10 @@
     <string name="main_tab_text_1">Home</string>
     <string name="main_tab_text_2">Summary</string>
 
+    <string name="viewscreen_tab_text_1">Entry</string>
+    <string name="viewscreen_tab_text_2">Analysis</string>
+    <string name="viewscreen_tab_text_3">Gallery</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
