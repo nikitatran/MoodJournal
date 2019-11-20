@@ -1,5 +1,7 @@
 package com.codingwithmitch.journal;
 
+import android.content.Context;
+import android.hardware.input.InputManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -133,6 +136,8 @@ public class NoteEditActivity extends AppCompatActivity implements
         mLinedEditText.setFocusableInTouchMode(true);
         mLinedEditText.setCursorVisible(true);
         mLinedEditText.requestFocus();
+
+        mLinedEditText.setSelection(mLinedEditText.getText().length()); //set cursor to end of entry text if there is any
     }
 
     private void enableEditMode(){
@@ -145,9 +150,19 @@ public class NoteEditActivity extends AppCompatActivity implements
         mMode = EDIT_MODE_ENABLED;
 
         enableContentInteraction();
+
+        //show soft keyboard
+        View view = this.getCurrentFocus();
+        if(view != null){
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            //imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            imm.showSoftInput(view, 0);
+        }
+
+        //enableContentInteraction();
     }
 
-    private void disableEditMode(){
+    private void disableEditMode() {
         Log.d(TAG, "disableEditMode: called.");
         mBackArrowContainer.setVisibility(View.VISIBLE);
         mCheckContainer.setVisibility(View.GONE);
@@ -157,18 +172,39 @@ public class NoteEditActivity extends AppCompatActivity implements
 
         mMode = EDIT_MODE_DISABLED;
 
-        disableContentInteraction();
+        //hide soft keyboard
+        View view = this.getCurrentFocus();
+        if(view != null){
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
 
+        disableContentInteraction();
+    }
+    //take out empty characters (new line and spaces) from string
+    private String trimString(String toTrim){
+        String str = toTrim;
+        str = str.replace("\n", "");
+        str = str.replace(" ", "");
+        return str;
+    }
+
+    private void saveToDatabase(){
         // Check if they typed anything into the note. Don't want to save an empty note.
-        String temp = mLinedEditText.getText().toString();
-        temp = temp.replace("\n", "");
-        temp = temp.replace(" ", "");
-        if(temp.length() > 0){
-            mNoteFinal.setTitle(mEditTitle.getText().toString());
+        String content = trimString(mLinedEditText.getText().toString());
+        String title = trimString(mEditTitle.getText().toString());
+
+        //only save note to database if there is content in the entry -- title can be blank
+        if(content.length() > 0){
+            //if title remains blank, set title to "Untitled note"
+            if(title.length() == 0){
+                //mViewTitle.setText("Untitled note");
+                mNoteFinal.setTitle("Untitled note");
+            }
+            else mNoteFinal.setTitle(mEditTitle.getText().toString());
             mNoteFinal.setContent(mLinedEditText.getText().toString());
             String timestamp = Utility.getCurrentEpochMilli();
             mNoteFinal.setTimestamp(timestamp);
-
 
             Log.d(TAG, "disableEditMode: initial: " + mNoteInitial.toString());
             Log.d(TAG, "disableEditMode: final: " + mNoteFinal.toString());
@@ -188,12 +224,15 @@ public class NoteEditActivity extends AppCompatActivity implements
     }
 
     private void setNewNoteProperties(){
-        mViewTitle.setText("Note Title");
-        mEditTitle.setText("Note Title");
+        //mViewTitle.setText("Note Title");
+        mViewTitle.setText("Untitled note");
+        //mEditTitle.setText("Note Title");
+        mEditTitle.setHint("Your title here");
+        mLinedEditText.setHint("Tap to type");
 
         mNoteFinal = new Note();
         mNoteInitial = new Note();
-        mNoteInitial.setTitle("Note Title");
+        //mNoteInitial.setTitle("Note Title");
     }
 
     private void setNoteProperties(){
@@ -209,6 +248,7 @@ public class NoteEditActivity extends AppCompatActivity implements
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent motionEvent) {
+        enableEditMode();
         return false;
     }
 
@@ -258,6 +298,7 @@ public class NoteEditActivity extends AppCompatActivity implements
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.toolbar_back_arrow:{
+                saveToDatabase();
                 finish();
                 break;
             }
