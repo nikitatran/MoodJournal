@@ -27,35 +27,12 @@ public class MainActivity extends AppCompatActivity
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-        FloatingActionButton fab = findViewById(R.id.fab);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
-    //private ArrayList<Note> mNotes = new ArrayList<>();
     @Override
     public void onNoteClick(int position, ArrayList<Note> mNotes) {
-        //NoteRepository mNoteRepository = new NoteRepository(this);
-
-
         Intent intent = new Intent(this, NoteEditActivity.class);
         intent.putExtra("selected_note", mNotes.get(position));
         startActivity(intent);
-
-        /*Toast.makeText(MainActivity.this, position + " clicked"
-                        +"\n" +
-                        "size: " + mNotes.size()
-
-                , Toast.LENGTH_SHORT
-
-
-        ).show();*/
-
     }
 }
