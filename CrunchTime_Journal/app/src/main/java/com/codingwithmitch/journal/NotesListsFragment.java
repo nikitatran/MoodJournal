@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -42,15 +43,18 @@ public class NotesListsFragment extends Fragment {
     private ArrayList<Note> mNotes = new ArrayList<>();
     private NotesRecyclerAdapter mNoteRecyclerAdapter;
     private NoteRepository mNoteRepository;
+    private Snackbar snackbar;
 
-    // TODO: Rename parameter arguments, choose names that match
+    /*
+    // Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    // Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    */
 
     public NotesListsFragment() {
         // Required empty public constructor
@@ -59,12 +63,9 @@ public class NotesListsFragment extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NotesListsFragment.
      */
-    // TODO: Rename and change types and number of parameters
+    // Rename and change types and number of parameters
+    /*
     public static NotesListsFragment newInstance(String param1, String param2) {
         NotesListsFragment fragment = new NotesListsFragment();
         Bundle args = new Bundle();
@@ -73,14 +74,17 @@ public class NotesListsFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+     */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+         */
     }
 
     @Override
@@ -110,6 +114,8 @@ public class NotesListsFragment extends Fragment {
         mNoteRepository = new NoteRepository(getActivity());
         retrieveNotes();
 
+        snackbar = Snackbar.make(view, "", Snackbar.LENGTH_LONG);
+
         return view;
     }
 
@@ -129,10 +135,14 @@ public class NotesListsFragment extends Fragment {
     }
 
     private void deleteNote(Note note) {
+        snackbar.setText("Deleted " + "\"" + note.getTitle() + "\"")
+                .setAction("Undo", null); //TODO: create undo delete functionality
         mNotes.remove(note);
         mNoteRecyclerAdapter.notifyDataSetChanged();
 
         mNoteRepository.deleteNoteTask(note);
+
+        snackbar.show();
     }
 
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
@@ -210,7 +220,6 @@ public class NotesListsFragment extends Fragment {
 
             try {
                 Long epoch = Long.parseLong(mNotes.get(position).getTimestamp());
-                //TODO: convert timestamp(epoch) to timestamp in user's device's timezone
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, YYYY\nh:mm a");
                 dateFormat.setTimeZone(TimeZone.getDefault());
                 String timestamp = dateFormat.format(new Date(epoch));
