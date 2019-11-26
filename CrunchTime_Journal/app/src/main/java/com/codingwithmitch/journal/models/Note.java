@@ -36,7 +36,7 @@ public class Note implements Parcelable {
     private double fear;
 
     @ColumnInfo(name = "happy")
-    private double happy;
+    public double happy;
 
     @ColumnInfo(name = "excited")
     private double excited;

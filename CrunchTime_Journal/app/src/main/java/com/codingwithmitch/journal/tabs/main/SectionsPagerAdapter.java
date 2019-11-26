@@ -36,7 +36,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new NotesListsFragment();
                 break;
             case 1:
-                fragment = PlaceholderFragment.newInstance(position + 1); //replace with your own fragment
+                fragment = BreakdownFragment.newInstance(position + 1); //replace with your own fragment
                 break;
         }
         return fragment;

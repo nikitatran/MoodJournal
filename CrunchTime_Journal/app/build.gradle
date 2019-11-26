@@ -47,4 +47,5 @@ dependencies {
     implementation files('libs/paralleldots-1.0.2.jar')
     implementation 'com.squareup.okhttp3:okhttp:4.2.2'
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'com.android.support:gridlayout-v7:28.0.0'
 }

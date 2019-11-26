@@ -20,9 +20,14 @@ public interface NoteDao {
     @Query("SELECT * FROM notes ORDER BY timestamp DESC")
     LiveData<List<Note>> getNotes();
 
+    @Query("SELECT * FROM notes WHERE :currentTime < CAST(timestamp AS LONG)")
+    LiveData<List<Note>> getNotes7Days(Long currentTime);
+
     @Delete
     int delete(Note... notes);
 
     @Update
     int updateNotes(Note... notes);
+
+
 }

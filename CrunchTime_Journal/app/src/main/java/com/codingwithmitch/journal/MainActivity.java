@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
     implements NotesListsFragment.OnNoteListener
+
 {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

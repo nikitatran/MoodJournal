@@ -209,7 +209,7 @@ public class NotesListsFragment extends Fragment {
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
             try {
-                Long epoch = Long.parseLong(mNotes.get(position).getTimestamp());
+                Long epoch = Long.parseLong(String.valueOf (mNotes.get(position).getTimestamp()));
                 //TODO: convert timestamp(epoch) to timestamp in user's device's timezone
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, YYYY\nh:mm a");
                 dateFormat.setTimeZone(TimeZone.getDefault());
