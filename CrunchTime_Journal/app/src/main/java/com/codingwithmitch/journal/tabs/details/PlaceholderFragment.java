@@ -1,4 +1,4 @@
-package com.codingwithmitch.journal.tabs.main;
+package com.codingwithmitch.journal.tabs.details;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,12 +14,12 @@ import android.arch.lifecycle.ViewModelProviders;
 import com.codingwithmitch.journal.R;
 
 /**
- * Placeholder for a tab in MainSectionsPagerAdapter (instantiated in getItem)
- * App will crash if any tab doesn't have an associated fragment
+ * A placeholder fragment containing a simple view.
  */
 public class PlaceholderFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
+
 
 
     public static PlaceholderFragment newInstance(int index) {
@@ -34,13 +34,14 @@ public class PlaceholderFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_notes_list, container, false);
+        View root = inflater.inflate(R.layout.fragment_details, container, false);
         return root;
     }
 }

@@ -1,44 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:weightSum="100"
     android:background="@color/colorPrimaryDark"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:weightSum="100">
 
     <RelativeLayout
+        android:id="@+id/back_arrow_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="10"
-        android:id="@+id/back_arrow_container">
+        android:layout_weight="10">
 
         <ImageButton
+            android:id="@+id/toolbar_back_arrow"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_arrow_back_black_24dp"
-            android:background="?attr/selectableItemBackground"
-            android:id="@+id/toolbar_back_arrow"
             android:layout_centerInParent="true"
-            />
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_arrow_back_black_24dp" />
 
     </RelativeLayout>
 
 
     <RelativeLayout
+        android:id="@+id/check_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="10"
-        android:visibility="gone"
-        android:id="@+id/check_container">
+        android:visibility="gone">
 
         <ImageButton
+            android:id="@+id/toolbar_check"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_check_black_24dp"
+            android:layout_centerInParent="true"
             android:background="?attr/selectableItemBackground"
-            android:id="@+id/toolbar_check"
-            android:layout_centerInParent="true" />
+            android:src="@drawable/ic_check_black_24dp" />
 
     </RelativeLayout>
 
@@ -47,7 +46,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_weight="85"
+        android:layout_weight="80"
         android:textColor="#000"
         android:textSize="23sp"
         android:visibility="visible" />
@@ -57,12 +56,28 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_weight="85"
+        android:layout_weight="80"
         android:background="#fff"
         android:padding="2dp"
         android:textColor="#000"
         android:textSize="23sp"
         android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/edit_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="10">
+
+        <ImageButton
+            android:id="@+id/edit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_arrow_back_black_24dp" />
+
+    </RelativeLayout>
 
 
 </LinearLayout>

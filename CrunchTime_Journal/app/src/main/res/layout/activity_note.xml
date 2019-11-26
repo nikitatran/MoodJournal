@@ -11,14 +11,19 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark">
 
+        <include
+            android:id="@+id/note_toolbar"
+            layout="@layout/note_toolbar" />
+        <!--
         <android.support.v7.widget.Toolbar
+            android:id="@+id/note_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/note_toolbar">
+            android:layout_height="match_parent">
 
-            <include layout="@layout/note_toolbar"/>
+            <include layout="@layout/note_toolbar" />
 
         </android.support.v7.widget.Toolbar>
+        -->
 
     </android.support.design.widget.AppBarLayout>
 

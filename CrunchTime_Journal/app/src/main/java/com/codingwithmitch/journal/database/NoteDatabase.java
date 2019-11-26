@@ -9,7 +9,7 @@ import android.content.Context;
 
 import com.codingwithmitch.journal.models.Note;
 
-@Database(entities = {Note.class}, version = 2)
+@Database(entities = {Note.class}, version = 1)
 public abstract class NoteDatabase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "notes_db";
