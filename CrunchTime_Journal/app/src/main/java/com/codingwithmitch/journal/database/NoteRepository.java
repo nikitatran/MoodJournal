@@ -34,6 +34,10 @@ public class NoteRepository {
         return mNoteDatabase.getNoteDao().getNotes();
     }
 
+    public LiveData<List<Note>> retrieveNotes7daysTask(long time) {
+        return mNoteDatabase.getNoteDao().getNotes7Days(time);
+    }
+
     public void deleteNoteTask(Note note){
         new DeleteAsyncTask(mNoteDatabase.getNoteDao()).execute(note);
     }

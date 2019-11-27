@@ -8,11 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.codingwithmitch.journal.NoteDetailsFragment;
-import com.codingwithmitch.journal.NotesListsFragment;
 
-import com.codingwithmitch.journal.NotesListsFragment;
 import com.codingwithmitch.journal.R;
-import com.codingwithmitch.journal.tabs.main.PlaceholderFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to

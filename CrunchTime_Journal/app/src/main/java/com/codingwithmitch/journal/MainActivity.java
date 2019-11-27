@@ -9,12 +9,15 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.codingwithmitch.journal.models.Note;
 import com.codingwithmitch.journal.tabs.main.MainSectionsPagerAdapter;
+import com.codingwithmitch.journal.tabs.main.NotesListsFragment;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
     implements NotesListsFragment.OnNoteListener
 {
+    private boolean wasClicked; //used to prevent multiple activities starting when item clicked > 1
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +30,19 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        wasClicked = false;
+    }
+
+    @Override
     public void onNoteClick(int position, ArrayList<Note> mNotes) {
-        //Intent intent = new Intent(this, DetailsActivity.class);
-        Intent intent = new Intent(this, NoteEditActivity.class);
-        intent.putExtra("selected_note", mNotes.get(position));
-        startActivity(intent);
+        if(!wasClicked) {
+            wasClicked = true;
+            //Intent intent = new Intent(this, DetailsActivity.class);
+            Intent intent = new Intent(this, NoteEditActivity.class);
+            intent.putExtra("selected_note", mNotes.get(position));
+            startActivity(intent);
+        }
     }
 }

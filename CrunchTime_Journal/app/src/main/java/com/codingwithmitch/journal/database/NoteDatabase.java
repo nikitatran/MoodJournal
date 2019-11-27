@@ -40,7 +40,7 @@ public abstract class NoteDatabase extends RoomDatabase {
         }
     };
 */
-    static NoteDatabase getInstance(final Context context){
+    public static NoteDatabase getInstance(final Context context){
         if(instance == null){
             instance = Room.databaseBuilder(
                     context.getApplicationContext(),

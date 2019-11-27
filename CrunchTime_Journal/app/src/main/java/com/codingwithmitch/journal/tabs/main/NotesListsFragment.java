@@ -1,4 +1,4 @@
-package com.codingwithmitch.journal;
+package com.codingwithmitch.journal.tabs.main;
 
 import android.arch.lifecycle.Observer;
 import android.content.Context;
@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.codingwithmitch.journal.NoteEditActivity;
+import com.codingwithmitch.journal.R;
 import com.codingwithmitch.journal.models.Note;
 import com.codingwithmitch.journal.database.NoteRepository;
 import com.codingwithmitch.journal.util.VerticalSpacingItemDecorator;

@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.codingwithmitch.journal.NotesListsFragment;
 import com.codingwithmitch.journal.R;
 
 /**
@@ -36,7 +35,7 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new NotesListsFragment();
                 break;
             case 1:
-                fragment = PlaceholderFragment.newInstance(position + 1); //replace with your own fragment
+                fragment = BreakdownFragment.newInstance(position + 1); //replace with your own fragment
                 break;
         }
         return fragment;
