@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.codingwithmitch.journal.database.async.AsyncResponse;
 import com.codingwithmitch.journal.models.Note;
 import com.codingwithmitch.journal.database.NoteRepository;
 import com.codingwithmitch.journal.util.ParallelDotsApi;
@@ -26,7 +27,8 @@ public class NoteEditActivity extends AppCompatActivity implements
         GestureDetector.OnGestureListener,
         GestureDetector.OnDoubleTapListener,
         View.OnClickListener,
-        TextWatcher
+        TextWatcher,
+        AsyncResponse
 {
 
     private static final String TAG = "NoteEditActivity";
@@ -81,8 +83,11 @@ public class NoteEditActivity extends AppCompatActivity implements
     private void saveChanges(){
         if(mIsNewNote){
             saveNewNote();
+            Log.d("whatstheID", mNoteFinal.getId()+" (in savechanges)");
         }else{
             updateNote();
+            api.setNote(mNoteFinal, mNoteRepository, false);
+            api.apiCall(mNoteFinal.getContent());
         }
     }
 
@@ -91,7 +96,24 @@ public class NoteEditActivity extends AppCompatActivity implements
     }
 
     public void saveNewNote() {
-        mNoteRepository.insertNoteTask(mNoteFinal);
+        mNoteRepository.insertNoteTask(mNoteFinal, this);
+        /*
+            issue that occurred:
+            so the logic here is new note created -> api call -> api edits database row
+            that way the note can appear instantaneously to the user while the analysis runs in the background
+            otherwise, the new note would only be created once the api call is done
+            so there would be a lag in when the note appears in the recyclerview
+
+            when creating a new note, the id aka primary key is always at 0 for some reason
+            which does not reflect the actual primary key when you look in the database
+            so updating a newly created entry wouldn't work because DAO can't find primary key 0
+            which is why i had the issue where newly created notes would not have emotion values,
+            while edited notes did. edited notes had the correct id so the DAO could update the
+            corresponding entry.
+
+            the AsyncResponse interface is used to grab the primary id returned by InsertAsyncTask and
+            pass it over to this class so it can be used
+         */
     }
 
     private void setListeners(){
@@ -217,8 +239,8 @@ public class NoteEditActivity extends AppCompatActivity implements
                 saveChanges();
                 //^ ensures a row exists for this entry
                 //then set the emotion column values
-                api.setNote(mNoteFinal, mNoteRepository); //pass in the note so it knows which row in database to update
-                api.apiCall(mNoteFinal.getContent()); //start api call
+                //api.setNote(mNoteFinal, mNoteRepository,false); //pass in the note so it knows which row in database to update
+                //api.apiCall(mNoteFinal.getContent()); //start api call
             }
         }
     }
@@ -353,6 +375,15 @@ public class NoteEditActivity extends AppCompatActivity implements
     @Override
     public void afterTextChanged(Editable editable) {
 
+    }
+
+    @Override
+    public void processFinish(long output) {
+        mNoteFinal.setId((int)output);
+        Log.d("whatstheID", mNoteFinal.getId()+" (in processFinish)");
+
+        api.setNote(mNoteFinal, mNoteRepository, true);
+        api.apiCall(mNoteFinal.getContent());
     }
 }
 

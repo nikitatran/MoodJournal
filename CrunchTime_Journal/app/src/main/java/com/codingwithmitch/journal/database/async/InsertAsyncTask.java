@@ -1,22 +1,32 @@
 package com.codingwithmitch.journal.database.async;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.codingwithmitch.journal.models.Note;
 import com.codingwithmitch.journal.database.NoteDao;
 
-public class InsertAsyncTask extends AsyncTask<Note, Void, Void> {
-
+public class InsertAsyncTask extends AsyncTask<Note, Void, long[]> {
     private NoteDao mNoteDao;
+    private long[] id;
+    public AsyncResponse delegate = null;
 
     public InsertAsyncTask(NoteDao dao) {
         mNoteDao = dao;
     }
 
+
     @Override
-    protected Void doInBackground(Note... notes) {
-        mNoteDao.insertNotes(notes);
-        return null;
+    protected long[] doInBackground(Note... notes) {
+        return mNoteDao.insertNotes(notes);
+        //return null;
     }
 
+    @Override
+    protected void onPostExecute(long[] id) {
+        delegate.processFinish(id[0]);
+        Log.d("insertasync", ""+id[0]);
+        return;
+    }
 }
+

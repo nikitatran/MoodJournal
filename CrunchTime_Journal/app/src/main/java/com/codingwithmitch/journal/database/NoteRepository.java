@@ -4,6 +4,7 @@ package com.codingwithmitch.journal.database;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
 
+import com.codingwithmitch.journal.database.async.AsyncResponse;
 import com.codingwithmitch.journal.database.async.DeleteAsyncTask;
 import com.codingwithmitch.journal.database.async.InsertAsyncTask;
 import com.codingwithmitch.journal.database.async.UpdateAsyncTask;
@@ -19,8 +20,10 @@ public class NoteRepository {
         mNoteDatabase = NoteDatabase.getInstance(context);
     }
 
-    public void insertNoteTask(Note note){
-        new InsertAsyncTask(mNoteDatabase.getNoteDao()).execute(note);
+    public void insertNoteTask(Note note, AsyncResponse context){
+        InsertAsyncTask insert = new InsertAsyncTask(mNoteDatabase.getNoteDao());
+        insert.delegate = context;
+        insert.execute(note);
     }
 
     public void updateNoteTask(Note note){

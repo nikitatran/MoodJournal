@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onNoteClick(int position, ArrayList<Note> mNotes) {
-        Intent intent = new Intent(this, DetailsActivity.class);
-        //Intent intent = new Intent(this, NoteEditActivity.class);
+        //Intent intent = new Intent(this, DetailsActivity.class);
+        Intent intent = new Intent(this, NoteEditActivity.class);
         intent.putExtra("selected_note", mNotes.get(position));
         startActivity(intent);
     }

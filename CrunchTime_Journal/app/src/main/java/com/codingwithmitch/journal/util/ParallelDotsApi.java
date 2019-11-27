@@ -31,17 +31,18 @@ public class ParallelDotsApi {
     private double dHappy;
     private double dExcited;
 
-
     private Note note;
     private NoteRepository noteRepo;
+    private boolean isNewNote;
 
     public ParallelDotsApi(){
 
     }
 
-    public void setNote(Note n, NoteRepository repo){
+    public void setNote(Note n, NoteRepository repo, boolean b){
         note = n;
         noteRepo = repo;
+        isNewNote = b;
     }
 
     public double getdBored(){
@@ -152,7 +153,12 @@ public class ParallelDotsApi {
                     note.setExcited(dExcited);
 
                     //update note's emotion columns
-                    noteRepo.updateNoteTask(note);
+                    if (isNewNote) {
+                        noteRepo.updateNoteTask(note);
+                    }
+                    else
+                        noteRepo.updateNoteTask(note);
+
                     Log.d("Emotion API: ", note.toString());
 
                 } catch (IOException e) {

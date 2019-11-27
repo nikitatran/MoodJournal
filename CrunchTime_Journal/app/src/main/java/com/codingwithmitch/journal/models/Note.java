@@ -41,7 +41,6 @@ public class Note implements Parcelable {
     @ColumnInfo(name = "excited")
     private double excited;
 
-
     public Note(String title, String content, String timestamp) {
         this.title = title;
         this.content = content;

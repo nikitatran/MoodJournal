@@ -11,10 +11,12 @@ import com.codingwithmitch.journal.models.Note;
 
 import java.util.List;
 
+import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
+
 @Dao
 public interface NoteDao {
 
-    @Insert
+    @Insert(onConflict = REPLACE)
     long[] insertNotes(Note... notes);
 
     @Query("SELECT * FROM notes ORDER BY timestamp DESC")
