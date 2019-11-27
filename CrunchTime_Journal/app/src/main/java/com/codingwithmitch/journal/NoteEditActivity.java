@@ -1,6 +1,7 @@
 package com.codingwithmitch.journal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.input.InputManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,7 +40,7 @@ public class NoteEditActivity extends AppCompatActivity implements
     private LinedEditText mLinedEditText;
     private EditText mEditTitle;
     private TextView mViewTitle;
-    private RelativeLayout mCheckContainer, mBackArrowContainer;
+    private RelativeLayout mCheckContainer, mBackArrowContainer, mEditContainer;
     private ImageButton mCheck, mBackArrow;
 
 
@@ -64,6 +65,9 @@ public class NoteEditActivity extends AppCompatActivity implements
         mBackArrow = findViewById(R.id.toolbar_back_arrow);
         mCheckContainer = findViewById(R.id.check_container);
         mBackArrowContainer = findViewById(R.id.back_arrow_container);
+        mEditContainer = findViewById(R.id.edit_container);
+
+        mEditContainer.setVisibility(View.GONE);
 
         mNoteRepository = new NoteRepository(this);
 
@@ -321,6 +325,10 @@ public class NoteEditActivity extends AppCompatActivity implements
         switch (view.getId()){
             case R.id.toolbar_back_arrow:{
                 saveToDatabase();
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("title",mNoteFinal.getTitle());
+                returnIntent.putExtra("content",mNoteFinal.getContent());
+                setResult(RESULT_OK,returnIntent);
                 finish();
                 break;
             }

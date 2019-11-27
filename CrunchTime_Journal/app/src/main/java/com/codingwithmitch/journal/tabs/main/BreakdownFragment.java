@@ -74,19 +74,20 @@ public class BreakdownFragment extends Fragment {
              */
             @Override
             public void onChanged(@Nullable List<Note> notes) {
-                if(mNotes.size() > 0){
-                    mNotes.clear();
-                }
-                if(notes != null){
-                    mNotes.addAll(notes);
-                }
+                if(notes.size() > 0) {
+                    if (mNotes.size() > 0) {
+                        mNotes.clear();
+                    }
+                    if (notes != null) {
+                        mNotes.addAll(notes);
+                    }
 
-                int list_size = mNotes.size();
-                Log.d(TAG, "list size: "+list_size);
+                    int list_size = mNotes.size();
+                    Log.d(TAG, "list size: " + list_size);
 
-                Log.d(TAG, "content: " + mNotes.get(0).getContent());
-                double happy = mNotes.get(0).getHappy(); //position 0 would be the oldest entry in the list that got returned
-                Log.d(TAG, "happy: "+happy);
+                    Log.d(TAG, "content: " + mNotes.get(0).getContent());
+                    double happy = mNotes.get(0).getHappy(); //position 0 would be the oldest entry in the list that got returned
+                    Log.d(TAG, "happy: " + happy);
 
                 /*
                     step-by-step of my testing:
@@ -102,6 +103,7 @@ public class BreakdownFragment extends Fragment {
                     so from what ive done, looks like it's working.
                     search "breakdown" in logcat to see for yourself
                  */
+                }
             }
         });
 

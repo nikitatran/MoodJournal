@@ -1,11 +1,13 @@
 package com.codingwithmitch.journal.tabs.details;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import com.codingwithmitch.journal.NoteDetailsFragment;
 
@@ -30,6 +32,7 @@ public class DetailsSectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
+        Log.d("getItem", position + " called");
         Fragment fragment = null;
         switch(position){
             case 0:

@@ -58,7 +58,12 @@ public class Note implements Parcelable {
         title = in.readString();
         content = in.readString();
         timestamp = in.readString();
-
+        bored = in.readDouble();
+        angry = in.readDouble();
+        sad = in.readDouble();
+        fear = in.readDouble();
+        happy = in.readDouble();
+        excited = in.readDouble();
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
@@ -160,7 +165,11 @@ public class Note implements Parcelable {
         parcel.writeString(title);
         parcel.writeString(content);
         parcel.writeString(timestamp);
-
-
+        parcel.writeDouble(bored);
+        parcel.writeDouble(angry);
+        parcel.writeDouble(sad);
+        parcel.writeDouble(fear);
+        parcel.writeDouble(happy);
+        parcel.writeDouble(excited);
     }
 }

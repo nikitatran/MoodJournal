@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 
+import com.codingwithmitch.journal.database.NoteRepository;
 import com.codingwithmitch.journal.models.Note;
 import com.codingwithmitch.journal.tabs.main.MainSectionsPagerAdapter;
 import com.codingwithmitch.journal.tabs.main.NotesListsFragment;
@@ -39,9 +41,10 @@ public class MainActivity extends AppCompatActivity
     public void onNoteClick(int position, ArrayList<Note> mNotes) {
         if(!wasClicked) {
             wasClicked = true;
-            //Intent intent = new Intent(this, DetailsActivity.class);
-            Intent intent = new Intent(this, NoteEditActivity.class);
+            Intent intent = new Intent(this, DetailsActivity.class);
+            //Intent intent = new Intent(this, NoteEditActivity.class);
             intent.putExtra("selected_note", mNotes.get(position));
+            //Log.d("selected_note main", ""+mNotes.get(position).getHappy());
             startActivity(intent);
         }
     }

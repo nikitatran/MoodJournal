@@ -38,6 +38,10 @@ public class NoteRepository {
         return mNoteDatabase.getNoteDao().getNotes7Days(time);
     }
 
+    public LiveData<List<Note>> getNoteById(int id) {
+        return mNoteDatabase.getNoteDao().getOneNote(id);
+    }
+
     public void deleteNoteTask(Note note){
         new DeleteAsyncTask(mNoteDatabase.getNoteDao()).execute(note);
     }
