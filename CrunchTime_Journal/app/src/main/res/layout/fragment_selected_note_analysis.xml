@@ -1,0 +1,116 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailsActivity">
+
+    <TextView
+        android:id="@+id/happyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Happy: "
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/happyValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/happyLabel"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sadLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sad: "
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/happyLabel"/>
+
+    <TextView
+        android:id="@+id/sadValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/sadLabel"
+        app:layout_constraintTop_toBottomOf="@id/happyValue"/>
+
+    <TextView
+        android:id="@+id/excitedLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Excited: "
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sadLabel"/>
+
+    <TextView
+        android:id="@+id/excitedValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/excitedLabel"
+        app:layout_constraintTop_toBottomOf="@id/sadValue"/>
+
+    <TextView
+        android:id="@+id/fearLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fear: "
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/excitedLabel"/>
+
+    <TextView
+        android:id="@+id/fearValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/fearLabel"
+        app:layout_constraintTop_toBottomOf="@id/excitedValue"/>
+
+    <TextView
+        android:id="@+id/boredLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bored: "
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fearLabel"/>
+
+    <TextView
+        android:id="@+id/boredValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/boredLabel"
+        app:layout_constraintTop_toBottomOf="@id/fearValue"/>
+
+    <TextView
+        android:id="@+id/angryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Angry: "
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/boredLabel"/>
+
+    <TextView
+        android:id="@+id/angryValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/angryLabel"
+        app:layout_constraintTop_toBottomOf="@id/boredValue"/>
+</android.support.constraint.ConstraintLayout>

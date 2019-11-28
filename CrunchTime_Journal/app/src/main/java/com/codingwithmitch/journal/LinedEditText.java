@@ -23,7 +23,8 @@ public class LinedEditText extends android.support.v7.widget.AppCompatEditText {
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(2);
-        mPaint.setColor(0xFFFFD966); // Color of the lines on paper
+        mPaint.setColor(0xFFADC5FF); // Color of the lines on paper
+        //use google color picker and  https://convertingcolors.com/hex-color-ADC5FF.html
 
     }
 

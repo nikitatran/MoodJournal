@@ -241,10 +241,6 @@ public class NoteEditActivity extends AppCompatActivity implements
                 Log.d(TAG, "disableEditMode: saving edited note");
 
                 saveChanges();
-                //^ ensures a row exists for this entry
-                //then set the emotion column values
-                //api.setNote(mNoteFinal, mNoteRepository,false); //pass in the note so it knows which row in database to update
-                //api.apiCall(mNoteFinal.getContent()); //start api call
             }
         }
     }
@@ -325,6 +321,8 @@ public class NoteEditActivity extends AppCompatActivity implements
         switch (view.getId()){
             case R.id.toolbar_back_arrow:{
                 saveToDatabase();
+                //send back edited title and content to details activity so
+                //view can be updated with edits
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("title",mNoteFinal.getTitle());
                 returnIntent.putExtra("content",mNoteFinal.getContent());

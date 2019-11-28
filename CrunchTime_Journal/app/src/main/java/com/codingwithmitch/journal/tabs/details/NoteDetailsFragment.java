@@ -1,4 +1,4 @@
-package com.codingwithmitch.journal;
+package com.codingwithmitch.journal.tabs.details;
 
 
 import android.arch.lifecycle.Observer;
@@ -15,6 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.codingwithmitch.journal.DetailsActivity;
+import com.codingwithmitch.journal.LinedEditText;
+import com.codingwithmitch.journal.R;
 import com.codingwithmitch.journal.database.NoteRepository;
 import com.codingwithmitch.journal.models.Note;
 

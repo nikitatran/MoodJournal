@@ -1,15 +1,12 @@
 package com.codingwithmitch.journal.tabs.details;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
-
-import com.codingwithmitch.journal.NoteDetailsFragment;
 
 import com.codingwithmitch.journal.R;
 
@@ -39,7 +36,7 @@ public class DetailsSectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new NoteDetailsFragment();
                 break;
             case 1:
-                fragment = PlaceholderFragment.newInstance(position + 1);
+                fragment = new SelectedNoteAnalysisFragment();
                 break;
             case 2:
                 fragment = PlaceholderFragment.newInstance(position + 1);

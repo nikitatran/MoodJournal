@@ -117,11 +117,6 @@ public class ParallelDotsApi {
             try {
 
                 try {
-                    // TODO: Delete Decimal Formatter. This is used here for testing purposes
-                    DecimalFormat df2 = new DecimalFormat ("#");
-                    df2.setRoundingMode(RoundingMode.UP);
-                    //Decimal Formatter
-
                     //Change each string into a float of two decimal places
                     String jsonResponseString = emotionResponse.body ().string ();
                     JSONObject myObject = new JSONObject (jsonResponseString);

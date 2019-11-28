@@ -10,6 +10,7 @@ public class InsertAsyncTask extends AsyncTask<Note, Void, long[]> {
     private NoteDao mNoteDao;
     private long[] id;
     public AsyncResponse delegate = null;
+    //ref: https://stackoverflow.com/questions/12575068/how-to-get-the-result-of-onpostexecute-to-main-activity-because-asynctask-is-a
 
     public InsertAsyncTask(NoteDao dao) {
         mNoteDao = dao;

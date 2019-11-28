@@ -12,4 +12,12 @@
     <color name="black">#000</color>
     <color name="white">#fff</color>
 
+    <!-- toolbar -->
+    <color name="turquoise">#43CED3</color>
+    <color name="sapphire">#106389</color>
+
+    <color name="paper">#FAFAFA</color>
+
+    <!-- fab -->
+    <color name="paradisePink">#EE4266</color>
 </resources>
