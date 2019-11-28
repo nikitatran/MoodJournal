@@ -43,7 +43,9 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/toolbar_gradient" />
+            android:background="@drawable/toolbar_gradient"
+            app:tabMaxWidth="0dp"
+            app:tabGravity="fill"/>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager

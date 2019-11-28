@@ -30,7 +30,7 @@ public class SelectedNoteAnalysisFragment extends Fragment {
     public SelectedNoteAnalysisFragment() {
         // Required empty public constructor
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

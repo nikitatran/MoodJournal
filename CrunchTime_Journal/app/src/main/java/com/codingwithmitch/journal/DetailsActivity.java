@@ -95,7 +95,6 @@ public class DetailsActivity extends AppCompatActivity {
     //getting updated title and content after edit activity finishes
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //TODO set emotions after edit
         switch(resultCode) {
             case RESULT_OK:
                 TextView toolbar_text = findViewById(R.id.note_text_title);

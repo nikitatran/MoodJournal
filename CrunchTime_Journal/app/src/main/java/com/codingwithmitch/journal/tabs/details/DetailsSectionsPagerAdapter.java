@@ -17,7 +17,7 @@ import com.codingwithmitch.journal.R;
 public class DetailsSectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.details_tab_text_1, R.string.details_tab_text_2, R.string.details_tab_text_3};
+    private static final int[] TAB_TITLES = new int[]{R.string.details_tab_text_1, R.string.details_tab_text_2};//, R.string.details_tab_text_3};
     private final Context mContext;
 
     public DetailsSectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -38,9 +38,11 @@ public class DetailsSectionsPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 fragment = new SelectedNoteAnalysisFragment();
                 break;
-            case 2:
+            /*case 2:
                 fragment = PlaceholderFragment.newInstance(position + 1);
                 break;
+
+             */
         }
         return fragment;
     }
@@ -53,7 +55,8 @@ public class DetailsSectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        // Show 3 total pages.
-        return 3;
+        // how many pages to show
+        //return 3;
+        return 2;
     }
 }
