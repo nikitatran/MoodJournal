@@ -1,39 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/paper">
+    tools:context="MainActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <include
-            android:id="@+id/note_toolbar"
-            layout="@layout/note_toolbar" />
-        <!--
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/note_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <include layout="@layout/note_toolbar" />
-
-        </android.support.v7.widget.Toolbar>
-        -->
-
-    </android.support.design.widget.AppBarLayout>
-
-    <com.codingwithmitch.journal.LinedEditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/note_text"
-        android:textSize="23sp"
-        android:textColor="#000"
-        android:padding="5dp"
-        android:gravity="top"
-        android:imeOptions="flagNoExtractUi"/>
+        android:background="@color/paper"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/note_toolbar"
+                layout="@layout/note_toolbar" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <com.codingwithmitch.journal.LinedEditText
+            android:id="@+id/note_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:gravity="top"
+            android:imeOptions="flagNoExtractUi"
+            android:padding="5dp"
+            android:textColor="#000"
+            android:textSize="23sp" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/accent"
+        android:src="@drawable/add"
+        android:visibility="gone" />
+
+</android.support.design.widget.CoordinatorLayout>

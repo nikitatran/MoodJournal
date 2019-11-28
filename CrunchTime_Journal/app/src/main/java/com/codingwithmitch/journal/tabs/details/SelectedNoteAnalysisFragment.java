@@ -70,8 +70,8 @@ public class SelectedNoteAnalysisFragment extends Fragment {
     }
 
     private void setViews(View view, Note note){
-        DecimalFormat df = new DecimalFormat("#.####");
-        df.setRoundingMode(RoundingMode.CEILING);
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.DOWN);
 
         TextView happyValue = view.findViewById(R.id.happyValue);
         TextView sadValue = view.findViewById(R.id.sadValue);
@@ -80,11 +80,11 @@ public class SelectedNoteAnalysisFragment extends Fragment {
         TextView boredValue = view.findViewById(R.id.boredValue);
         TextView fearValue = view.findViewById(R.id.fearValue);
 
-        happyValue.setText(df.format(note.getHappy()));
-        sadValue.setText(df.format(note.getSad()));
-        boredValue.setText(df.format(note.getBored()));
-        angryValue.setText(df.format(note.getAngry()));
-        excitedValue.setText(df.format(note.getExcited()));
-        fearValue.setText(df.format(note.getFear()));
+        happyValue.setText(df.format(note.getHappy())+"%");
+        sadValue.setText(df.format(note.getSad())+"%");
+        boredValue.setText(df.format(note.getBored())+"%");
+        angryValue.setText(df.format(note.getAngry())+"%");
+        excitedValue.setText(df.format(note.getExcited())+"%");
+        fearValue.setText(df.format(note.getFear())+"%");
     }
 }

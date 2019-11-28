@@ -1,11 +1,16 @@
 package com.codingwithmitch.journal;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 
 
 import com.codingwithmitch.journal.database.NoteRepository;

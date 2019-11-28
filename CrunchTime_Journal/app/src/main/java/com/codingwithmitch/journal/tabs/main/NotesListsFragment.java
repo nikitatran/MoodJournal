@@ -106,7 +106,7 @@ public class NotesListsFragment extends Fragment {
         //initialize RecyclerView
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(10);
+        VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(30);
         mRecyclerView.addItemDecoration(itemDecorator);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
         mNoteRecyclerAdapter = new NotesRecyclerAdapter(mNotes);

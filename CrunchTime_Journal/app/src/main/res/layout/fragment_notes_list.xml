@@ -41,6 +41,6 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:src="@drawable/add"
-        android:backgroundTint="@color/paradisePink"/>
+        android:backgroundTint="@color/accent"/>
 
 </android.support.design.widget.CoordinatorLayout>

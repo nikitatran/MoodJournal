@@ -9,11 +9,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -163,7 +165,9 @@ public class NoteEditActivity extends AppCompatActivity implements
         mLinedEditText.setCursorVisible(true);
         mLinedEditText.requestFocus();
 
-        mLinedEditText.setSelection(mLinedEditText.getText().length()); //set cursor to end of entry text if there is any
+        //problem where clicking elsewhere in the text forces cursor to jump to the end
+        //annoying when trying to fix typos
+        //mLinedEditText.setSelection(mLinedEditText.getText().length()); //set cursor to end of entry text if there is any
     }
 
     private void enableEditMode(){
@@ -181,11 +185,8 @@ public class NoteEditActivity extends AppCompatActivity implements
         View view = this.getCurrentFocus();
         if(view != null){
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            //imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             imm.showSoftInput(view, 0);
         }
-
-        //enableContentInteraction();
     }
 
     private void disableEditMode() {
@@ -246,15 +247,12 @@ public class NoteEditActivity extends AppCompatActivity implements
     }
 
     private void setNewNoteProperties(){
-        //mViewTitle.setText("Note Title");
         mViewTitle.setText("Untitled note");
-        //mEditTitle.setText("Note Title");
         mEditTitle.setHint("Your title here");
         mLinedEditText.setHint("Tap to type");
 
         mNoteFinal = new Note();
         mNoteInitial = new Note();
-        //mNoteInitial.setTitle("Note Title");
     }
 
     private void setNoteProperties(){

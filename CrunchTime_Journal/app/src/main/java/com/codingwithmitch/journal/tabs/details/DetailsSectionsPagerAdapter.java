@@ -39,10 +39,12 @@ public class DetailsSectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new SelectedNoteAnalysisFragment();
                 break;
             /*case 2:
-                fragment = PlaceholderFragment.newInstance(position + 1);
+                fragment = new EmotionFragment();
                 break;
 
              */
+
+
         }
         return fragment;
     }

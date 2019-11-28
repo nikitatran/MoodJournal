@@ -4,22 +4,17 @@
     <color name="colorPrimaryDark">#e6ac00</color>
     <color name="colorAccent">#d9d9d9</color>
 
-    <color name="lightYellow">#ffffb3</color>
-    <color name="mediumYellow">#ffdf80</color>
-    <color name="darkYellow">#ffd24d</color>
-    <color name="lightGrey">#d9d9d9</color>
-    <color name="darkGrey">#a2a2a2</color>
-    <color name="black">#000</color>
-    <color name="white">#fff</color>
-
     <!-- toolbar -->
     <color name="turquoise">#43CED3</color>
     <color name="sapphire">#106389</color>
-
-    <color name="paper">#FAFAFA</color>
+    <color name="toolbarTextColor">#fff</color>
 
     <!-- fab -->
-    <color name="paradisePink">#EE4266</color>
+    <color name="accent">#FFCD3E</color>
 
     <!-- https://coolors.co/0d3b66-faf0ca-f4d35e-43ced3-106389 -->
+
+    <color name="background">#f0f0f0</color>
+    <color name="listItem">#fff</color>
+    <color name="paper">#fff</color>
 </resources>

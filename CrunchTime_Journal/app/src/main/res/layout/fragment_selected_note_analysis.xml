@@ -1,3 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".DetailsActivity">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alignmentMode="alignMargins"
+        android:columnCount="2"
+        android:columnOrderPreserved="true"
+        android:padding="@dimen/gridOuterPadding"
+        android:rowCount="3">
+
+        <!-- Row 1 -->
+
+        <!-- Column 1 -->
+        <android.support.v7.widget.CardView
+            style="@style/myCardView"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardCornerRadius="@dimen/cardCornerRadius"
+            app:cardElevation="@dimen/cardElevation">
+
+            <android.support.constraint.ConstraintLayout style="@style/cardLayout">
+
+                <ImageView
+                    android:id="@+id/happyEmoji"
+                    style="@style/emojiImageView"
+                    android:layout_width="0dp"
+                    android:src="@drawable/happy"
+                    app:layout_constraintBottom_toTopOf="@+id/happyLabel"
+                    app:layout_constraintEnd_toStartOf="@+id/happyValue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/happyLabel"
+                    style="@style/textLabel"
+                    android:text="Happy"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/happyValue"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/happyValue"
+                    style="@style/textPercent"
+                    android:text="99.05%"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/happyEmoji"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
+        <!-- Column 2 -->
+        <android.support.v7.widget.CardView
+            style="@style/myCardView"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardCornerRadius="@dimen/cardCornerRadius"
+            app:cardElevation="@dimen/cardElevation">
+
+            <android.support.constraint.ConstraintLayout style="@style/cardLayout">
+
+                <ImageView
+                    android:id="@+id/sadEmoji"
+                    style="@style/emojiImageView"
+                    android:layout_width="0dp"
+                    android:src="@drawable/sad"
+                    app:layout_constraintBottom_toTopOf="@+id/sadLabel"
+                    app:layout_constraintEnd_toStartOf="@+id/sadValue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/sadLabel"
+                    style="@style/textLabel"
+                    android:text="Sad"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/sadValue"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/sadValue"
+                    style="@style/textPercent"
+                    android:text="99.05%"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/sadEmoji"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <!-- Row 2 -->
+
+        <!-- Column 1 -->
+        <android.support.v7.widget.CardView
+            style="@style/myCardView"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardCornerRadius="@dimen/cardCornerRadius"
+            app:cardElevation="@dimen/cardElevation">
+
+            <android.support.constraint.ConstraintLayout style="@style/cardLayout">
+
+                <ImageView
+                    android:id="@+id/boredEmoji"
+                    style="@style/emojiImageView"
+                    android:layout_width="0dp"
+                    android:src="@drawable/bored"
+                    app:layout_constraintBottom_toTopOf="@+id/boredLabel"
+                    app:layout_constraintEnd_toStartOf="@+id/boredValue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/boredLabel"
+                    style="@style/textLabel"
+                    android:text="Bored"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/boredValue"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/boredValue"
+                    style="@style/textPercent"
+                    android:text="99.05%"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/boredEmoji"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
+        <!-- Column 2 -->
+        <android.support.v7.widget.CardView
+            style="@style/myCardView"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardCornerRadius="@dimen/cardCornerRadius"
+            app:cardElevation="@dimen/cardElevation">
+
+            <android.support.constraint.ConstraintLayout style="@style/cardLayout">
+
+                <ImageView
+                    android:id="@+id/excitedEmoji"
+                    style="@style/emojiImageView"
+                    android:layout_width="0dp"
+                    android:src="@drawable/excited"
+                    app:layout_constraintBottom_toTopOf="@+id/excitedLabel"
+                    app:layout_constraintEnd_toStartOf="@+id/excitedValue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/excitedLabel"
+                    style="@style/textLabel"
+                    android:text="Excited"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/excitedValue"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/excitedValue"
+                    style="@style/textPercent"
+                    android:text="99.05%"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/excitedEmoji"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <!-- Row 3 -->
+
+        <!-- Column 1 -->
+        <android.support.v7.widget.CardView
+            style="@style/myCardView"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="@dimen/bottomShadowMargin"
+            app:cardCornerRadius="@dimen/cardCornerRadius"
+            app:cardElevation="@dimen/cardElevation">
+
+            <android.support.constraint.ConstraintLayout style="@style/cardLayout">
+
+                <ImageView
+                    android:id="@+id/fearEmoji"
+                    style="@style/emojiImageView"
+                    android:layout_width="0dp"
+                    android:src="@drawable/fear"
+                    app:layout_constraintBottom_toTopOf="@+id/fearLabel"
+                    app:layout_constraintEnd_toStartOf="@+id/fearValue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/fearLabel"
+                    style="@style/textLabel"
+                    android:text="Fear"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fearValue"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/fearValue"
+                    style="@style/textPercent"
+                    android:text="99.05%"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/fearEmoji"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
+        <!-- Column 2 -->
+        <android.support.v7.widget.CardView
+            style="@style/myCardView"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="@dimen/bottomShadowMargin"
+            app:cardCornerRadius="@dimen/cardCornerRadius"
+            app:cardElevation="@dimen/cardElevation">
+
+            <android.support.constraint.ConstraintLayout style="@style/cardLayout">
+
+                <ImageView
+                    android:id="@+id/angryEmoji"
+                    style="@style/emojiImageView"
+                    android:layout_width="0dp"
+                    android:src="@drawable/angry"
+                    app:layout_constraintBottom_toTopOf="@+id/angryLabel"
+                    app:layout_constraintEnd_toStartOf="@+id/angryValue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/angryLabel"
+                    style="@style/textLabel"
+                    android:text="Angry"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/angryValue"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/angryValue"
+                    style="@style/textPercent"
+                    android:text="99.05%"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/angryEmoji"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
+    </GridLayout>
+
+</ScrollView>
+
+<!--
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -114,3 +392,4 @@
         app:layout_constraintStart_toEndOf="@+id/angryLabel"
         app:layout_constraintTop_toBottomOf="@id/boredValue"/>
 </android.support.constraint.ConstraintLayout>
+-->

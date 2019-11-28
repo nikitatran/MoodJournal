@@ -22,6 +22,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+//TODO list dialog box when response is null
 public class ParallelDotsApi {
     String api_key = "1yajIxksKMQYuy9Wy13XRnilpBVtHtVwzwv07QWcm8w";
     private double dBored;
@@ -117,45 +118,45 @@ public class ParallelDotsApi {
             try {
 
                 try {
-                    //Change each string into a float of two decimal places
-                    String jsonResponseString = emotionResponse.body ().string ();
-                    JSONObject myObject = new JSONObject (jsonResponseString);
-                    JSONObject emotion = myObject.getJSONObject("emotion");
-                    dBored = emotion.getDouble ("indifferent" );
-                    dBored *= 100.00;
-                    Log.d ("dBoard", String.valueOf (dBored));
-                    dAngry = emotion.getDouble ("angry");
-                    dAngry *= 100.00;
-                    Log.d ("dAngry", String.valueOf (dAngry));
-                    dSad = emotion.getDouble ("sad");
-                    dSad *= 100.00;
-                    Log.d ("dSad", String.valueOf (dSad));
-                    dFear = emotion.getDouble ("fear");
-                    dFear *= 100.00;
-                    Log.d ("dfear", String.valueOf (dFear));
-                    dHappy = emotion.getDouble ("happy");
-                    dHappy *= 100.00;
-                    Log.d ("dHappy", String.valueOf (dHappy));
-                    dExcited = emotion.getDouble ("excited");
-                    dExcited *= 100.00;
-                    Log.d ("dExcited", String.valueOf (dExcited));
+                    if(emotionResponse != null) {
+                        //Change each string into a float of two decimal places
+                        String jsonResponseString = emotionResponse.body().string();
+                        JSONObject myObject = new JSONObject(jsonResponseString);
+                        JSONObject emotion = myObject.getJSONObject("emotion");
+                        dBored = emotion.getDouble("indifferent");
+                        dBored *= 100.00;
+                        Log.d("dBoard", String.valueOf(dBored));
+                        dAngry = emotion.getDouble("angry");
+                        dAngry *= 100.00;
+                        Log.d("dAngry", String.valueOf(dAngry));
+                        dSad = emotion.getDouble("sad");
+                        dSad *= 100.00;
+                        Log.d("dSad", String.valueOf(dSad));
+                        dFear = emotion.getDouble("fear");
+                        dFear *= 100.00;
+                        Log.d("dfear", String.valueOf(dFear));
+                        dHappy = emotion.getDouble("happy");
+                        dHappy *= 100.00;
+                        Log.d("dHappy", String.valueOf(dHappy));
+                        dExcited = emotion.getDouble("excited");
+                        dExcited *= 100.00;
+                        Log.d("dExcited", String.valueOf(dExcited));
 
-                    note.setAngry(dAngry);
-                    note.setBored(dBored);
-                    note.setSad(dSad);
-                    note.setFear(dFear);
-                    note.setHappy(dHappy);
-                    note.setExcited(dExcited);
+                        note.setAngry(dAngry);
+                        note.setBored(dBored);
+                        note.setSad(dSad);
+                        note.setFear(dFear);
+                        note.setHappy(dHappy);
+                        note.setExcited(dExcited);
 
-                    //update note's emotion columns
-                    if (isNewNote) {
-                        noteRepo.updateNoteTask(note);
+                        //update note's emotion columns
+                        if (isNewNote) {
+                            noteRepo.updateNoteTask(note);
+                        } else
+                            noteRepo.updateNoteTask(note);
+
+                        Log.d("Emotion API: ", note.toString());
                     }
-                    else
-                        noteRepo.updateNoteTask(note);
-
-                    Log.d("Emotion API: ", note.toString());
-
                 } catch (IOException e) {
                     e.printStackTrace ();
                 }

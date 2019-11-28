@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- MAKE SURE LIST IS IN ORDER CORRESPONDING TO emotions_label IN values/strings.xml-->
+    <integer-array name="emojis">
+        <item>@drawable/happy</item>
+        <item>@drawable/sad</item>
+        <item>@drawable/angry</item>
+        <item>@drawable/bored</item>
+        <item>@drawable/fear</item>
+        <item>@drawable/excited</item>
+    </integer-array>
+
+</resources>

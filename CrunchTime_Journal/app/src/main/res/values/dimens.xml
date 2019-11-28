@@ -5,4 +5,18 @@
     <dimen name="appbar_padding">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <dimen name="cardElevation">4dp</dimen>
+    <dimen name="cardCornerRadius">4dp</dimen>
+
+    <dimen name="labelTextSize">18sp</dimen>
+    <dimen name="percentTextSize">25sp</dimen>
+
+    <dimen name="imageHeight">70dp</dimen>
+    <dimen name="gridOuterPadding">10dp</dimen>
+    <dimen name="cardPadding">10dp</dimen>
+
+    <!-- TODO fine tune this value -->
+    <dimen name="bottomShadowMargin">40dp</dimen>
 </resources>

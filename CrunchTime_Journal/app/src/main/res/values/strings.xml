@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Journal</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="home_screen_label">Mood Journal</string>
     <string name="title_activity_details">DetailsActivity</string>
 
     <string name="main_tab_text_1">Home</string>
@@ -9,4 +9,14 @@
     <string name="details_tab_text_1">Entry</string>
     <string name="details_tab_text_2">Analysis</string>
     <string name="details_tab_text_3">Gallery</string>
+
+    <!-- MAKE SURE LIST IS IN ORDER CORRESPONDING TO emojis IN values/arrays.xml-->
+    <string-array name="emotions_label">
+        <item>Happy</item>
+        <item>Sad</item>
+        <item>Angry</item>
+        <item>Bored</item>
+        <item>Fear</item>
+        <item>Excited</item>
+    </string-array>
 </resources>
