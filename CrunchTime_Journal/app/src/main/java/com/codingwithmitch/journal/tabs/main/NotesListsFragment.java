@@ -136,15 +136,22 @@ public class NotesListsFragment extends Fragment {
         });
     }
 
-    private void deleteNote(Note note) {
-        snackbar.setText("Deleted " + "\"" + note.getTitle() + "\"")
-                .setAction("Undo", null); //TODO: create undo delete functionality
+    private void deleteNote(Note note, final int pos) {
+        final Note deletedNote = note;
         mNotes.remove(note);
         mNoteRecyclerAdapter.notifyDataSetChanged();
 
         mNoteRepository.deleteNoteTask(note);
 
-        snackbar.show();
+        snackbar.setText("Deleted " + "\"" + note.getTitle() + "\"")
+                .setAction("Undo", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mNotes.add(pos, deletedNote);
+                        mNoteRecyclerAdapter.notifyDataSetChanged();
+                        mNoteRepository.insertNoteTask(deletedNote);
+                    }
+                }).show();
     }
 
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
@@ -155,7 +162,8 @@ public class NotesListsFragment extends Fragment {
 
         @Override
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-            deleteNote(mNotes.get(viewHolder.getAdapterPosition()));
+            int position = viewHolder.getAdapterPosition();
+            deleteNote(mNotes.get(position),position);
         }
     };
 

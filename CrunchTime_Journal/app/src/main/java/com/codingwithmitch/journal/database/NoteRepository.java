@@ -7,6 +7,7 @@ import android.content.Context;
 import com.codingwithmitch.journal.database.async.AsyncResponse;
 import com.codingwithmitch.journal.database.async.DeleteAsyncTask;
 import com.codingwithmitch.journal.database.async.InsertAsyncTask;
+import com.codingwithmitch.journal.database.async.InsertAsyncTaskNoInterface;
 import com.codingwithmitch.journal.database.async.UpdateAsyncTask;
 import com.codingwithmitch.journal.models.Note;
 
@@ -24,6 +25,10 @@ public class NoteRepository {
         InsertAsyncTask insert = new InsertAsyncTask(mNoteDatabase.getNoteDao());
         insert.delegate = context;
         insert.execute(note);
+    }
+
+    public void insertNoteTask(Note note){
+        new InsertAsyncTaskNoInterface(mNoteDatabase.getNoteDao()).execute(note);
     }
 
     public void updateNoteTask(Note note){

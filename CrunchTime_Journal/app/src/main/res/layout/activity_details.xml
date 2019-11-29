@@ -9,8 +9,9 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:background="#00000000"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
 
 
         <include
@@ -43,7 +44,7 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/toolbar_gradient"
+            android:background="#00000000"
             app:tabMaxWidth="0dp"
             app:tabGravity="fill"/>
     </android.support.design.widget.AppBarLayout>

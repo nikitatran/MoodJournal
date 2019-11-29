@@ -19,7 +19,7 @@ import com.codingwithmitch.journal.tabs.main.MainSectionsPagerAdapter;
 import com.codingwithmitch.journal.tabs.main.NotesListsFragment;
 
 import java.util.ArrayList;
-
+//TODO prevent moving tab when swipe right on home tab so deleting notes wont be intercepted by tab movement
 public class MainActivity extends AppCompatActivity
     implements NotesListsFragment.OnNoteListener
 {
@@ -34,12 +34,14 @@ public class MainActivity extends AppCompatActivity
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+        Log.d("mainactivity", "oncreate called");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         wasClicked = false;
+        Log.d("mainactivity", "onresume called");
     }
 
     @Override

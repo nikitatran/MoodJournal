@@ -39,7 +39,7 @@ public class SelectedNoteAnalysisFragment extends Fragment {
         Note note = getActivity().getIntent().getParcelableExtra("selected_note");
         setViews(view, note);
 
-        Log.d("TAG", "oncreateview called");
+        Log.d(TAG, "oncreateview called");
         return view;
     }
 

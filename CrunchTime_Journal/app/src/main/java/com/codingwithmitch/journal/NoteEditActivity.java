@@ -44,6 +44,7 @@ public class NoteEditActivity extends AppCompatActivity implements
     private TextView mViewTitle;
     private RelativeLayout mCheckContainer, mBackArrowContainer, mEditContainer;
     private ImageButton mCheck, mBackArrow;
+    private View mOverlay;
 
 
     // vars
@@ -68,6 +69,7 @@ public class NoteEditActivity extends AppCompatActivity implements
         mCheckContainer = findViewById(R.id.check_container);
         mBackArrowContainer = findViewById(R.id.back_arrow_container);
         mEditContainer = findViewById(R.id.edit_container);
+        mOverlay = findViewById(R.id.overlay);
 
         mEditContainer.setVisibility(View.GONE);
 
@@ -92,6 +94,7 @@ public class NoteEditActivity extends AppCompatActivity implements
             Log.d("whatstheID", mNoteFinal.getId()+" (in savechanges)");
         }else{
             updateNote();
+            Log.d("whatstheID", mNoteFinal.getId()+" (in updatenote)");
             api.setNote(mNoteFinal, mNoteRepository, false);
             api.apiCall(mNoteFinal.getContent());
         }
@@ -129,6 +132,7 @@ public class NoteEditActivity extends AppCompatActivity implements
         mViewTitle.setOnClickListener(this);
         mBackArrow.setOnClickListener(this);
         mEditTitle.addTextChangedListener(this);
+        mOverlay.setOnClickListener(this);
     }
 
     private boolean getIncomingIntent(){
@@ -164,10 +168,6 @@ public class NoteEditActivity extends AppCompatActivity implements
         mLinedEditText.setFocusableInTouchMode(true);
         mLinedEditText.setCursorVisible(true);
         mLinedEditText.requestFocus();
-
-        //problem where clicking elsewhere in the text forces cursor to jump to the end
-        //annoying when trying to fix typos
-        //mLinedEditText.setSelection(mLinedEditText.getText().length()); //set cursor to end of entry text if there is any
     }
 
     private void enableEditMode(){
@@ -330,12 +330,30 @@ public class NoteEditActivity extends AppCompatActivity implements
             }
             case R.id.toolbar_check:{
                 disableEditMode();
+                mOverlay.setClickable(true);
                 break;
             }
             case R.id.note_text_title:{
                 enableEditMode();
                 mEditTitle.requestFocus();
                 mEditTitle.setSelection(mEditTitle.length());
+                break;
+            }
+            /*
+                overlay is used
+                to catch first click onto edittext
+                and set the cursor to the end
+
+                setting cursor should only happen once;
+                if cursor set in enableEditMode() or onSingleTapConfirmed or in a edittext listener,
+                then everytime the user clicks on the screen the cursor would jump to the end
+                which is annoying if you're trying to fix a typo in the middle of a word
+             */
+            case R.id.overlay:{
+                Log.d("NoteEditActivity", "overlay clicked");
+                mOverlay.setClickable(false);
+                mLinedEditText.setSelection(mLinedEditText.getText().length());
+                enableEditMode();
                 break;
             }
         }

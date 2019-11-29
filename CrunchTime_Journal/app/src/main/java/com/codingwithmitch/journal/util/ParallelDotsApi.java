@@ -36,6 +36,8 @@ public class ParallelDotsApi {
     private NoteRepository noteRepo;
     private boolean isNewNote;
 
+    public static boolean apiCallFail = false;
+
     public ParallelDotsApi(){
 
     }
@@ -81,6 +83,7 @@ public class ParallelDotsApi {
 //            p.show();
         }
 
+        @Override
         protected Response doInBackground(String... sentenceToAnalyze) {
             //App pd = new App ("1yajIxksKMQYuy9Wy13XRnilpBVtHtVwzwv07QWcm8w");
 
@@ -114,7 +117,6 @@ public class ParallelDotsApi {
         @Override
         protected void onPostExecute(Response emotionResponse) {
             super.onPostExecute(emotionResponse);
-
             try {
 
                 try {
@@ -125,22 +127,21 @@ public class ParallelDotsApi {
                         JSONObject emotion = myObject.getJSONObject("emotion");
                         dBored = emotion.getDouble("indifferent");
                         dBored *= 100.00;
-                        Log.d("dBoard", String.valueOf(dBored));
+
                         dAngry = emotion.getDouble("angry");
                         dAngry *= 100.00;
-                        Log.d("dAngry", String.valueOf(dAngry));
+
                         dSad = emotion.getDouble("sad");
                         dSad *= 100.00;
-                        Log.d("dSad", String.valueOf(dSad));
+
                         dFear = emotion.getDouble("fear");
                         dFear *= 100.00;
-                        Log.d("dfear", String.valueOf(dFear));
+
                         dHappy = emotion.getDouble("happy");
                         dHappy *= 100.00;
-                        Log.d("dHappy", String.valueOf(dHappy));
+
                         dExcited = emotion.getDouble("excited");
                         dExcited *= 100.00;
-                        Log.d("dExcited", String.valueOf(dExcited));
 
                         note.setAngry(dAngry);
                         note.setBored(dBored);
@@ -156,7 +157,11 @@ public class ParallelDotsApi {
                             noteRepo.updateNoteTask(note);
 
                         Log.d("Emotion API: ", note.toString());
+                        apiCallFail = false;
                     }
+
+                    else apiCallFail = true;
+                    Log.d("apiCallFail", ""+apiCallFail);
                 } catch (IOException e) {
                     e.printStackTrace ();
                 }
