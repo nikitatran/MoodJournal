@@ -24,7 +24,7 @@ import okhttp3.Response;
 
 //TODO list dialog box when response is null
 public class ParallelDotsApi {
-    String api_key = "1yajIxksKMQYuy9Wy13XRnilpBVtHtVwzwv07QWcm8w";
+    String api_key = "jFEcMS6z1DJ9Y2abzJO6tyQ3FarcVzp2LV5gAW9fz3o";//"1yajIxksKMQYuy9Wy13XRnilpBVtHtVwzwv07QWcm8w";
     private double dBored;
     private double dAngry;
     private double dSad;
