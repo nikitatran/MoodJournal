@@ -4,16 +4,14 @@
     <color name="colorPrimaryDark">#106389</color>
     <color name="colorAccent">#FFCD3E</color>
 
-    <!-- toolbar -->
     <color name="turquoise">#43CED3</color>
     <color name="sapphire">#106389</color>
     <color name="toolbarTextColor">#fff</color>
 
-    <!-- fab -->
     <color name="accent">#FFCD3E</color>
     <color name="fab">#43CED3</color>
 
-    <!-- https://coolors.co/0d3b66-faf0ca-f4d35e-43ced3-106389 -->
+    <!-- use this to match colors: https://coolors.co/0d3b66-faf0ca-f4d35e-43ced3-106389 -->
 
     <color name="background">#f0f0f0</color>
     <color name="listItem">#fff</color>

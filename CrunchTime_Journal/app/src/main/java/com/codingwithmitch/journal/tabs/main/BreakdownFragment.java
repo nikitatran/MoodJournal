@@ -3,6 +3,7 @@ package com.codingwithmitch.journal.tabs.main;
 import android.arch.lifecycle.LiveData;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,191 +31,104 @@ import java.util.List;
  */
 public class BreakdownFragment extends Fragment {
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
     private static final String TAG = "breakdown";
-    private ArrayList<Note> mNotes = new ArrayList<>();
+    private ArrayList<Note> mNotes7 = new ArrayList<>();
+    private ArrayList<Note> mNotes30 = new ArrayList<>();
     private NoteRepository mNoteRepository;
 
 
-    public static BreakdownFragment newInstance(int index) {
-        BreakdownFragment fragment = new BreakdownFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt(ARG_SECTION_NUMBER, index);
-        fragment.setArguments(bundle);
-        return fragment;
+    public BreakdownFragment() {
+        // Required empty public constructor
     }
 
-
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //TODO Return the array of notes from the last 7 days
-        Long timestamp = Long.valueOf (Utility.getCurrentEpochMilli()) - 604800000;
-        Long timestamp30 = Long.valueOf (Utility.getCurrentEpochMilli ()) - (864000000 *3);
-
-        NoteDatabase appDatabase = NoteDatabase.getInstance (getActivity ());
-        appDatabase.getNoteDao ().getNotes7Days (timestamp);
-
-        mNoteRepository = new NoteRepository(getActivity());
-        //                |
-        //                V added this function in NoteRepository
-        mNoteRepository.retrieveNotes7daysTask(timestamp).observe(this, new Observer<List<Note>>() {
-            /*
-                every time a new note is added, onChanged will run
-                so this takes away the trouble of doing callbacks every time the database changes
-
-                downside is that this is asynchronous so it may be better to just code everything
-                inside onChanged()
-                for example list_size is 0 outside of this function even when there are notes available
-                but inside it shows the correct number of notes
-             */
-            @Override
-            public void onChanged(@Nullable List<Note> notes) {
-                double sad = 0;
-                double happy = 0;
-                double excited = 0;
-                double fear = 0;
-                double angry = 0;
-                double bored = 0;
-                if(notes.size() > 0) {
-                    if (mNotes.size() > 0) {
-                        mNotes.clear();
-
-                    }
-
-                    if (notes != null) {
-                        mNotes.addAll(notes);
-
-
-                    }
-                    int list_size = mNotes.size();
-                    Log.d(TAG, "list size: " + list_size);
-
-                    //TODO Create a loop that sums up the emotions in each note
-
-                    for (int i = 0; i< list_size; i++){
-                        sad = sad + mNotes.get(i).getSad ();  //position 0 would be the oldest entry in the list that got returned
-                        happy = happy + mNotes.get(i).getHappy ();
-                        angry = angry + mNotes.get(i).getAngry ();
-                        excited = excited + mNotes.get(i).getExcited ();
-                        fear = fear + mNotes.get(i).getFear ();
-                        bored = bored + mNotes.get(i).getBored ();
-                        setViews(getView (),sad,happy,angry,excited,fear,bored);
-                    }
-
-
-
-                    Log.d(TAG, "content: " + mNotes.get(0).getContent());
-                    Log.d(TAG, "sad: " + sad);
-
-                /*
-                    step-by-step of my testing:
-                    - i made 4 dummy notes
-                    - timestamps should be recent so the query won't filter them out
-                    - size returned correctly (returned 4)
-                    - opened the database file
-                    - edited the time for 1 file (changed milliseconds to be in 2009)
-                    - uploaded it to the database folder in device file manager
-                    - ran the app again
-                    - log says list size is 3 (so 1 entry got filtered out by the query)
-
-                    so from what ive done, looks like it's working.
-                    search "breakdown" in logcat to see for yourself
-                 */
-                }
-                else if(mNotes.size () ==0){
-
-                }
-            }
-        });
-
-
-        mNoteRepository.retrieveNotes30daysTask(timestamp30).observe(this, new Observer<List<Note>>() {
-            /*
-                every time a new note is added, onChanged will run
-                so this takes away the trouble of doing callbacks every time the database changes
-
-                downside is that this is asynchronous so it may be better to just code everything
-                inside onChanged()
-                for example list_size is 0 outside of this function even when there are notes available
-                but inside it shows the correct number of notes
-             */
-            @Override
-            public void onChanged(@Nullable List<Note> notes) {
-                double sad = 0;
-                double happy = 0;
-                double excited = 0;
-                double fear = 0;
-                double angry = 0;
-                double bored = 0;
-                if(notes.size() > 0) {
-                    if (mNotes.size() > 0) {
-                        mNotes.clear();
-
-                    }
-
-                    if (notes != null) {
-                        mNotes.addAll(notes);
-
-
-                    }
-                    int list_size = mNotes.size();
-                    Log.d(TAG, "list size: " + list_size);
-
-                    //TODO Create a loop that sums up the emotions in each note
-
-                    for (int i = 0; i< list_size; i++){
-                        sad = sad + mNotes.get(i).getSad ();  //position 0 would be the oldest entry in the list that got returned
-                        happy = happy + mNotes.get(i).getHappy ();
-                        angry = angry + mNotes.get(i).getAngry ();
-                        excited = excited + mNotes.get(i).getExcited ();
-                        fear = fear + mNotes.get(i).getFear ();
-                        bored = bored + mNotes.get(i).getBored ();
-                        setViews30(getView (),sad,happy,angry,excited,fear,bored);
-                    }
-
-
-
-                    Log.d(TAG, "content: " + mNotes.get(0).getContent());
-                    Log.d(TAG, "sad: " + sad);
-
-                /*
-                    step-by-step of my testing:
-                    - i made 4 dummy notes
-                    - timestamps should be recent so the query won't filter them out
-                    - size returned correctly (returned 4)
-                    - opened the database file
-                    - edited the time for 1 file (changed milliseconds to be in 2009)
-                    - uploaded it to the database folder in device file manager
-                    - ran the app again
-                    - log says list size is 3 (so 1 entry got filtered out by the query)
-
-                    so from what ive done, looks like it's working.
-                    search "breakdown" in logcat to see for yourself
-                 */
-                }
-                else if(mNotes.size () ==0){
-
-                }
-            }
-        });
-
-    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.tab_breakdown, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.tab_breakdown, container, false);
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        long timestamp = Long.valueOf(Utility.getCurrentEpochMilli()) - (DateUtils.WEEK_IN_MILLIS);
+        long timestamp30 = Long.valueOf(Utility.getCurrentEpochMilli()) - (DateUtils.YEAR_IN_MILLIS);
 
-        return root;
+        mNoteRepository = new NoteRepository(getActivity());
+        mNoteRepository.retrieveNotes7daysTask(timestamp).observe(this, new Observer<List<Note>>() {
+            @Override
+            public void onChanged(@Nullable List<Note> notes) {
+                double sad = 0;
+                double happy = 0;
+                double excited = 0;
+                double fear = 0;
+                double angry = 0;
+                double bored = 0;
+                if(notes.size() > 0) {
+                    if (mNotes7.size() > 0) {
+                        mNotes7.clear();
+                    }
+
+                    if (notes != null) {
+                        mNotes7.addAll(notes);
+                    }
+                    int list_size = mNotes7.size();
+                    Log.d(TAG, "list size: " + list_size);
+
+                    for (int i = 0; i < list_size; i++){
+                        sad = sad + mNotes7.get(i).getSad();
+                        happy = happy + mNotes7.get(i).getHappy();
+                        angry = angry + mNotes7.get(i).getAngry();
+                        excited = excited + mNotes7.get(i).getExcited();
+                        fear = fear + mNotes7.get(i).getFear();
+                        bored = bored + mNotes7.get(i).getBored();
+                        setViews(getView(),sad,happy,angry,excited,fear,bored);
+                    }
+
+                    Log.d(TAG, "content: " + mNotes7.get(0).getContent()); //position 0 would be the oldest entry in the list that got returned
+                    Log.d(TAG, "sad: " + sad);
+                }
+            }
+        });
+
+        mNoteRepository.retrieveNotes30daysTask(timestamp30).observe(this, new Observer<List<Note>>() {
+            @Override
+            public void onChanged(@Nullable List<Note> notes) {
+                double sad = 0;
+                double happy = 0;
+                double excited = 0;
+                double fear = 0;
+                double angry = 0;
+                double bored = 0;
+                if(notes.size() > 0) {
+                    if (mNotes30.size() > 0) {
+                        mNotes30.clear();
+                    }
+
+                    if (notes != null) {
+                        mNotes30.addAll(notes);
+                    }
+                    int list_size = mNotes30.size();
+                    Log.d(TAG, "list size: " + list_size);
+
+                    for (int i = 0; i < list_size; i++){
+                        sad = sad + mNotes30.get(i).getSad();
+                        happy = happy + mNotes30.get(i).getHappy();
+                        angry = angry + mNotes30.get(i).getAngry();
+                        excited = excited + mNotes30.get(i).getExcited();
+                        fear = fear + mNotes30.get(i).getFear();
+                        bored = bored + mNotes30.get(i).getBored();
+                        setViews30(getView(),sad,happy,angry,excited,fear,bored);
+                    }
+
+                    Log.d(TAG, "content: " + mNotes30.get(0).getContent()); //position 0 would be the oldest entry in the list that got returned
+                    Log.d(TAG, "sad: " + sad);
+                }
+            }
+        });
     }
 
     private void setViews(View view,double sad,double happy,double angry,double excited,double fear,double bored){
@@ -228,7 +142,7 @@ public class BreakdownFragment extends Fragment {
         TextView boredValue = view.findViewById(R.id.boredValueBreakdown);
         TextView fearValue = view.findViewById(R.id.fearValueBreakdown);
 
-        double emotionSum = sad+happy+ angry+excited+fear+bored;
+        double emotionSum = sad+happy+angry+excited+fear+bored;
 
         happyValue.setText(df.format(happy/emotionSum)+"%");
         sadValue.setText(df.format(sad/emotionSum)+"%");
@@ -250,7 +164,7 @@ public class BreakdownFragment extends Fragment {
         TextView boredValue = view.findViewById(R.id.boredValueBreakdown30);
         TextView fearValue = view.findViewById(R.id.fearValueBreakdown30);
 
-        double emotionSum = sad+happy+ angry+excited+fear+bored;
+        double emotionSum = sad+happy+angry+excited+fear+bored;
 
         happyValue.setText(df.format(happy/emotionSum)+"%");
         sadValue.setText(df.format(sad/emotionSum)+"%");
@@ -259,27 +173,4 @@ public class BreakdownFragment extends Fragment {
         excitedValue.setText(df.format(excited/emotionSum)+"%");
         fearValue.setText(df.format(fear/emotionSum)+"%");
     }
-
-    private void setViewsDefault(View view){
-        DecimalFormat df = new DecimalFormat("#.##");
-        df.setRoundingMode(RoundingMode.DOWN);
-
-        TextView happyValue = view.findViewById(R.id.happyValueBreakdown);
-        TextView sadValue = view.findViewById(R.id.sadValueBreakdown);
-        TextView angryValue = view.findViewById(R.id.angryValueBreakdown);
-        TextView excitedValue = view.findViewById(R.id.excitedValueBreakdown);
-        TextView boredValue = view.findViewById(R.id.boredValueBreakdown);
-        TextView fearValue = view.findViewById(R.id.fearValueBreakdown);
-
-
-
-        happyValue.setText(df.format(0.00)+"%");
-        sadValue.setText(df.format(0.00)+"%");
-        boredValue.setText(df.format(0.00)+"%");
-        angryValue.setText(df.format(0.00)+"%");
-        excitedValue.setText(df.format(0.00)+"%");
-        fearValue.setText(df.format(0.00)+"%");
-    }
-
-
 }

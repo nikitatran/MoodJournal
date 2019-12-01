@@ -4,19 +4,32 @@
     <string name="title_activity_details">DetailsActivity</string>
 
     <string name="main_tab_text_1">Home</string>
-    <string name="main_tab_text_2">Summary</string>
+    <string name="main_tab_text_2">Breakdown</string>
 
     <string name="details_tab_text_1">Entry</string>
     <string name="details_tab_text_2">Analysis</string>
     <string name="details_tab_text_3">Gallery</string>
 
-    <!-- MAKE SURE LIST IS IN ORDER CORRESPONDING TO emojis IN values/arrays.xml-->
-    <string-array name="emotions_label">
-        <item>Happy</item>
-        <item>Sad</item>
-        <item>Angry</item>
-        <item>Bored</item>
-        <item>Fear</item>
-        <item>Excited</item>
-    </string-array>
+    <string name="contentDesc_emojiHappy">Emoji with an open-mouth smile.</string>
+    <string name="contentDesc_emojiSad">Frowning emoji with a single tear coming out of it\'s left eye.</string>
+    <string name="contentDesc_emojiBored">Emoji with a blank stare and straight mouth.</string>
+    <string name="contentDesc_emojiExcited">Emoji with stars as eyes and an open-mouth smile.</string>
+    <string name="contentDesc_emojiFear">Emoji with mouth agape, eyes whitened by shock, hands cupping the sides of it\'s face, and a pale blue forehead indicating chills. Based off of painting \"The Scream\" by Edvard Munch.</string>
+    <string name="contentDesc_emojiAngry">Emoji with a scowl.</string>
+
+    <string name="happyLabel">Happy</string>
+    <string name="sadLabel">Sad</string>
+    <string name="boredLabel">Bored</string>
+    <string name="excitedLabel">Excited</string>
+    <string name="fearLabel">Fear</string>
+    <string name="angryLabel">Angry</string>
+
+    <string name="defaultPercent">0.0%</string>
+    <string name="defaultNoteTitle">Your title</string>
+    <string name="defaultNoteContent">Your content</string>
+    <string name="defaultNoteDate">Jan 1, 1970\n12:00 AM</string>
+
+
+    <string name="sevenDayHeader">7 Day Breakdown:</string>
+    <string name="thirtyDayHeader">30 Day Breakdown:</string>
 </resources>

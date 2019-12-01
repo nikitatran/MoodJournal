@@ -12,11 +12,13 @@
 
     <dimen name="labelTextSize">18sp</dimen>
     <dimen name="percentTextSize">25sp</dimen>
+    <dimen name="headerTextSize">30sp</dimen>
 
     <dimen name="imageHeight">70dp</dimen>
     <dimen name="gridOuterPadding">10dp</dimen>
     <dimen name="cardPadding">10dp</dimen>
 
-    <!-- TODO fine tune this value -->
-    <dimen name="bottomShadowMargin">40dp</dimen>
+    <dimen name="bottomShadowMargin">10dp</dimen>
+
+    <dimen name="headerTopSpacing">10dp</dimen>
 </resources>

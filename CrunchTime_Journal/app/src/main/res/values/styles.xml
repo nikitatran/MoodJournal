@@ -54,5 +54,13 @@
         <item name="android:padding">@dimen/cardPadding</item>
     </style>
 
+    <style name="breakdownHeader">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/gridOuterPadding</item>
+        <item name="android:paddingTop">@dimen/headerTopSpacing</item>
+        <item name="android:textSize">@dimen/headerTextSize</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>

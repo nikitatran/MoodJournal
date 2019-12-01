@@ -35,12 +35,10 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new NotesListsFragment();
                 break;
             case 1:
-                fragment = BreakdownFragment.newInstance(position + 1); //replace with your own fragment
+                fragment = new BreakdownFragment();
                 break;
         }
         return fragment;
-
-        //return PlaceholderFragment.newInstance(position + 1);
     }
 
     @Nullable
