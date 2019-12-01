@@ -53,12 +53,12 @@ public class BreakdownFragment extends Fragment {
         mNoteRepository.retrieveNotes7daysTask(timestamp).observe(this, new Observer<List<Note>>() {
             @Override
             public void onChanged(@Nullable List<Note> notes) {
-                double sad = 0;
-                double happy = 0;
-                double excited = 0;
-                double fear = 0;
-                double angry = 0;
-                double bored = 0;
+                double sad = 0.0;
+                double happy = 0.0;
+                double excited = 0.0;
+                double fear = 0.0;
+                double angry = 0.0;
+                double bored = 0.0;
                 if (notes.size() > 0) {
                     if (mNotes7.size() > 0) {
                         mNotes7.clear();
@@ -68,7 +68,6 @@ public class BreakdownFragment extends Fragment {
                         mNotes7.addAll(notes);
                     }
                     int list_size = mNotes7.size();
-                    Log.d(TAG, "list size: " + list_size);
 
                     for (int i = 0; i < list_size; i++) {
                         sad = sad + mNotes7.get(i).getSad();
@@ -77,8 +76,8 @@ public class BreakdownFragment extends Fragment {
                         excited = excited + mNotes7.get(i).getExcited();
                         fear = fear + mNotes7.get(i).getFear();
                         bored = bored + mNotes7.get(i).getBored();
-                        setViews(getView(), sad, happy, angry, excited, fear, bored);
                     }
+                    setViews(getView(), sad, happy, angry, excited, fear, bored);
                 }
             }
         });
@@ -101,7 +100,6 @@ public class BreakdownFragment extends Fragment {
                         mNotes30.addAll(notes);
                     }
                     int list_size = mNotes30.size();
-                    Log.d(TAG, "list size: " + list_size);
 
                     for (int i = 0; i < list_size; i++) {
                         sad = sad + mNotes30.get(i).getSad();
@@ -110,15 +108,15 @@ public class BreakdownFragment extends Fragment {
                         excited = excited + mNotes30.get(i).getExcited();
                         fear = fear + mNotes30.get(i).getFear();
                         bored = bored + mNotes30.get(i).getBored();
-                        setViews30(getView(), sad, happy, angry, excited, fear, bored);
                     }
+                    setViews30(getView(), sad, happy, angry, excited, fear, bored);
                 }
             }
         });
     }
 
     private void setViews(View view, double sad, double happy, double angry, double excited, double fear, double bored) {
-        DecimalFormat df = new DecimalFormat("#.##");
+        DecimalFormat df = new DecimalFormat("##.##");
         df.setRoundingMode(RoundingMode.DOWN);
 
         TextView happyValue = view.findViewById(R.id.happyValueBreakdown);
@@ -129,13 +127,19 @@ public class BreakdownFragment extends Fragment {
         TextView fearValue = view.findViewById(R.id.fearValueBreakdown);
 
         double emotionSum = sad + happy + angry + excited + fear + bored;
+        double happyAvg = (happy/emotionSum) * 100;
+        double sadAvg = (sad/emotionSum) * 100;
+        double boredAvg = (bored/emotionSum) * 100;
+        double angryAvg = (angry/emotionSum) * 100;
+        double excitedAvg = (excited/emotionSum) * 100;
+        double fearAvg = (fear/emotionSum) * 100;
 
-        happyValue.setText(df.format(happy / emotionSum) + "%");
-        sadValue.setText(df.format(sad / emotionSum) + "%");
-        boredValue.setText(df.format(bored / emotionSum) + "%");
-        angryValue.setText(df.format(angry / emotionSum) + "%");
-        excitedValue.setText(df.format(excited / emotionSum) + "%");
-        fearValue.setText(df.format(fear / emotionSum) + "%");
+        happyValue.setText(df.format(happyAvg) + "%");
+        sadValue.setText(df.format(sadAvg) + "%");
+        boredValue.setText(df.format(boredAvg) + "%");
+        angryValue.setText(df.format(angryAvg) + "%");
+        excitedValue.setText(df.format(excitedAvg) + "%");
+        fearValue.setText(df.format(fearAvg) + "%");
     }
 
 
@@ -152,11 +156,18 @@ public class BreakdownFragment extends Fragment {
 
         double emotionSum = sad + happy + angry + excited + fear + bored;
 
-        happyValue.setText(df.format(happy / emotionSum) + "%");
-        sadValue.setText(df.format(sad / emotionSum) + "%");
-        boredValue.setText(df.format(bored / emotionSum) + "%");
-        angryValue.setText(df.format(angry / emotionSum) + "%");
-        excitedValue.setText(df.format(excited / emotionSum) + "%");
-        fearValue.setText(df.format(fear / emotionSum) + "%");
+        double happyAvg = (happy/emotionSum) * 100;
+        double sadAvg = (sad/emotionSum) * 100;
+        double boredAvg = (bored/emotionSum) * 100;
+        double angryAvg = (angry/emotionSum) * 100;
+        double excitedAvg = (excited/emotionSum) * 100;
+        double fearAvg = (fear/emotionSum) * 100;
+
+        happyValue.setText(df.format(happyAvg) + "%");
+        sadValue.setText(df.format(sadAvg) + "%");
+        boredValue.setText(df.format(boredAvg) + "%");
+        angryValue.setText(df.format(angryAvg) + "%");
+        excitedValue.setText(df.format(excitedAvg) + "%");
+        fearValue.setText(df.format(fearAvg) + "%");
     }
 }

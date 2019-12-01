@@ -14,8 +14,8 @@
        >
 
         <TextView
-            style="@style/breakdownHeader"
             android:id="@+id/Header7"
+            style="@style/breakdownHeader"
             android:text="@string/sevenDayHeader" />
 
         <GridLayout

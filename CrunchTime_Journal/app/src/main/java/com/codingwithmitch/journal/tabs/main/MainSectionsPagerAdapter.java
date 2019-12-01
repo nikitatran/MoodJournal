@@ -21,6 +21,15 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
         mContext = context;
     }
 
+    /**
+     * This is where you set the fragments to be shown in each tab.
+     *
+     * pre: position <= getCount()
+     * post: fragments of each tab are instantiated according to position
+     *
+     * @param position tab number (starting from 0)
+     * @return Returns the Fragment associated with a specified position.
+     */
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = null;
@@ -35,12 +44,26 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
         return fragment;
     }
 
+    /**
+     * pre:
+     * - position <= getCount()
+     * - size of TAB_TITLES must match getCount()
+     * post: title of tabs will be set in view
+     *
+     * @param position tab number (starting from 0)
+     * @return
+     */
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
         return mContext.getResources().getString(TAB_TITLES[position]);
     }
 
+    /**
+     * Declares how many tabs will be shown.
+     *
+     * @return number of tabs
+     */
     @Override
     public int getCount() {
         return NUM_TABS;

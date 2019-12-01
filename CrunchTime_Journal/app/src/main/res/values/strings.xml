@@ -30,6 +30,6 @@
     <string name="defaultNoteDate">Jan 1, 1970\n12:00 AM</string>
 
 
-    <string name="sevenDayHeader">7 Day Breakdown:</string>
-    <string name="thirtyDayHeader">30 Day Breakdown:</string>
+    <string name="sevenDayHeader">7 Day Breakdown</string>
+    <string name="thirtyDayHeader">30 Day Breakdown</string>
 </resources>
