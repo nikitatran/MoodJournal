@@ -1,8 +1,6 @@
 package com.codingwithmitch.journal.database.async;
 
 import android.os.AsyncTask;
-import android.util.Log;
-
 import com.codingwithmitch.journal.database.NoteDao;
 import com.codingwithmitch.journal.models.Note;
 

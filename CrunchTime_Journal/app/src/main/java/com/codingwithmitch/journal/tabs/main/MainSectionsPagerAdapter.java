@@ -9,14 +9,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.codingwithmitch.journal.R;
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
- */
 public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.main_tab_text_1, R.string.main_tab_text_2};
+    private static final int NUM_TABS = 2;
     private final Context mContext;
 
     public MainSectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -26,9 +23,6 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-
         Fragment fragment = null;
         switch(position){
             case 0:
@@ -49,7 +43,6 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        // Show 2 total pages.
-        return 2;
+        return NUM_TABS;
     }
 }

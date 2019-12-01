@@ -1,6 +1,5 @@
 package com.codingwithmitch.journal.tabs.details;
 
-
 import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.codingwithmitch.journal.DetailsActivity;
 import com.codingwithmitch.journal.R;
 import com.codingwithmitch.journal.database.NoteRepository;
 import com.codingwithmitch.journal.models.Note;
@@ -21,9 +19,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class SelectedNoteAnalysisFragment extends Fragment {
     public static final String TAG = "AnalysisFrag";
 
@@ -32,14 +27,10 @@ public class SelectedNoteAnalysisFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_selected_note_analysis, container, false);
         Note note = getActivity().getIntent().getParcelableExtra("selected_note");
         setViews(view, note);
-
-        Log.d(TAG, "oncreateview called");
         return view;
     }
 
@@ -47,7 +38,6 @@ public class SelectedNoteAnalysisFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(TAG, "onresume called");
         Note note = getActivity().getIntent().getParcelableExtra("selected_note");
         NoteRepository mNoteRepository = new NoteRepository(getActivity());
         mNoteRepository.getNoteById(note.getId()).observe(this, new Observer<List<Note>>() {

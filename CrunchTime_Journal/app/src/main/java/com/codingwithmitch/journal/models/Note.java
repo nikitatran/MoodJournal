@@ -52,7 +52,77 @@ public class Note implements Parcelable {
 
     }
 
+    /* GETTERS AND SETTERS FOR NOTE DATA */
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    /* GETTERS AND SETTERS FOR EMOTION DATA */
+    public double getBored() {return bored;}
+    public void setBored(double bored) {this.bored = bored;}
+
+    public double getAngry() {return angry;}
+    public void setAngry(double angry) {this.angry = angry;}
+
+    public double getSad() {return sad;}
+    public void setSad(double sad) {this.sad = sad;}
+
+    public double getFear() {return fear;}
+    public void setFear(double fear) {this.fear = fear;}
+
+    public double getHappy() {return happy;}
+    public void setHappy(double happy) {this.happy = happy;}
+
+    public double getExcited() {return excited;}
+
+    public void setExcited(double excited) {this.excited = excited;}
+
+    @Override
+    public String toString() {
+        return "Note{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                ", bored='" + bored + '\'' +
+                ", angry='" + angry + '\'' +
+                ", sad='" + sad + '\'' +
+                ", fear='" + fear + '\'' +
+                ", happy='" + happy + '\'' +
+                ", excited='" + excited + '\'' +
+                '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    /* TO MAKE NOTE PARCELABLE */
     protected Note(Parcel in) {
         id = in.readInt();
         title = in.readString();
@@ -77,87 +147,6 @@ public class Note implements Parcelable {
             return new Note[size];
         }
     };
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    //Settings and Getters for Emotions
-    public double getBored() {return bored;}
-
-    public void setBored(double bored) {this.bored = bored;}
-
-    public double getAngry() {return angry;}
-
-    public void setAngry(double angry) {this.angry = angry;}
-
-    public double getSad() {return sad;}
-
-    public void setSad(double sad) {this.sad = sad;}
-
-    public double getFear() {return fear;}
-
-    public void setFear(double fear) {this.fear = fear;}
-
-    public double getHappy() {return happy;}
-
-    public void setHappy(double happy) {this.happy = happy;}
-
-    public double getExcited() {return excited;}
-
-    public void setExcited(double excited) {this.excited = excited;}
-
-
-
-    @Override
-    public String toString() {
-        return "Note{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", timestamp='" + timestamp + '\'' +
-                ", bored='" + bored + '\'' +
-                ", angry='" + angry + '\'' +
-                ", sad='" + sad + '\'' +
-                ", fear='" + fear + '\'' +
-                ", happy='" + happy + '\'' +
-                ", excited='" + excited + '\'' +
-                '}';
-    }
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {

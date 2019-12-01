@@ -6,14 +6,11 @@ import android.util.Log;
 
 import com.codingwithmitch.journal.database.NoteRepository;
 import com.codingwithmitch.journal.models.Note;
-import com.paralleldots.paralleldots.App;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
 
 import okhttp3.MultipartBody;
@@ -22,9 +19,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-//TODO list dialog box when response is null
 public class ParallelDotsApi {
-    String api_key = "jFEcMS6z1DJ9Y2abzJO6tyQ3FarcVzp2LV5gAW9fz3o";//"1yajIxksKMQYuy9Wy13XRnilpBVtHtVwzwv07QWcm8w";
+    String api_key = "jFEcMS6z1DJ9Y2abzJO6tyQ3FarcVzp2LV5gAW9fz3o";
     private double dBored;
     private double dAngry;
     private double dSad;
@@ -34,41 +30,18 @@ public class ParallelDotsApi {
 
     private Note note;
     private NoteRepository noteRepo;
-    private boolean isNewNote;
 
-    public static boolean apiCallFail = false;
-
-    public ParallelDotsApi(){
+    public ParallelDotsApi() {
 
     }
 
-    public void setNote(Note n, NoteRepository repo, boolean b){
+    public void setNote(Note n, NoteRepository repo) {
         note = n;
         noteRepo = repo;
-        isNewNote = b;
     }
 
-    public double getdBored(){
-        return dBored;
-    }
-    public double getdSad(){
-        return dSad;
-    }
-    public double getdHappy(){
-        return dHappy;
-    }
-    public double getdAngry(){
-        return dAngry;
-    }
-    public double getdFear(){
-        return dFear;
-    }
-    public double getdExcited(){
-        return dExcited;
-    }
-
-    public void apiCall(String stringToAnalyze){
-        AsyncTaskExample asyncTask=new AsyncTaskExample();
+    public void apiCall(String stringToAnalyze) {
+        AsyncTaskExample asyncTask = new AsyncTaskExample();
         asyncTask.execute(stringToAnalyze);
     }
 
@@ -76,23 +49,13 @@ public class ParallelDotsApi {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            p = new ProgressDialog(MainActivity.this);
-//            p.setMessage("Please wait...It is downloading");
-//            p.setIndeterminate(false);
-//            p.setCancelable(false);
-//            p.show();
         }
 
         @Override
         protected Response doInBackground(String... sentenceToAnalyze) {
-            //App pd = new App ("1yajIxksKMQYuy9Wy13XRnilpBVtHtVwzwv07QWcm8w");
-
             String text = sentenceToAnalyze[0];
             String url = "https://apis.paralleldots.com/v5/emotion";
 
-
-
-            Response Theresponse = null;
             RequestBody requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart("api_key", api_key)
@@ -109,19 +72,17 @@ public class ParallelDotsApi {
                 Response response = client.newCall(request).execute();
                 return response;
             } catch (IOException e) {
-                e.printStackTrace ();
+                e.printStackTrace();
             }
-
-            return Theresponse;
+            return null;
         }
+
         @Override
         protected void onPostExecute(Response emotionResponse) {
             super.onPostExecute(emotionResponse);
             try {
-
                 try {
-                    if(emotionResponse != null) {
-                        //Change each string into a float of two decimal places
+                    if (emotionResponse != null) {
                         String jsonResponseString = emotionResponse.body().string();
                         JSONObject myObject = new JSONObject(jsonResponseString);
                         JSONObject emotion = myObject.getJSONObject("emotion");
@@ -150,28 +111,13 @@ public class ParallelDotsApi {
                         note.setHappy(dHappy);
                         note.setExcited(dExcited);
 
-                        //update note's emotion columns
-                        if (isNewNote) {
-                            noteRepo.updateNoteTask(note);
-                        } else
-                            noteRepo.updateNoteTask(note);
-
-                        Log.d("Emotion API: ", note.toString());
-                        apiCallFail = false;
+                        noteRepo.updateNoteTask(note);
                     }
-
-                    else apiCallFail = true;
-                    Log.d("apiCallFail", ""+apiCallFail);
                 } catch (IOException e) {
-                    e.printStackTrace ();
+                    e.printStackTrace();
                 }
-
-
-
-
-
             } catch (JSONException e) {
-                e.printStackTrace ();
+                e.printStackTrace();
             }
 
         }

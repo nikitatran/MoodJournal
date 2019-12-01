@@ -1,6 +1,5 @@
 package com.codingwithmitch.journal.database;
 
-
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
 

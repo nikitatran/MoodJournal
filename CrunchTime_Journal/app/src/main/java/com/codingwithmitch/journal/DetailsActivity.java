@@ -2,12 +2,9 @@ package com.codingwithmitch.journal;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -88,8 +85,6 @@ public class DetailsActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
-
-        Log.d("detailsactivity", "oncreate called");
     }
 
     //getting updated title and content after edit activity finishes
@@ -101,9 +96,6 @@ public class DetailsActivity extends AppCompatActivity {
 
                 final String title = data.getStringExtra("title");
                 toolbar_text.setText(title);
-
-                Log.d("onActivityresult","title: " + data.getStringExtra("title"));
-                Log.d("onActivityresult","content: " + data.getStringExtra("content"));
 
                 content = data.getStringExtra("content");
 

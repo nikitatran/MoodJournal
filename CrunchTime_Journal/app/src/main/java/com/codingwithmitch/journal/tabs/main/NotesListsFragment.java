@@ -13,7 +13,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+
 import java.util.Date;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +36,7 @@ import java.util.TimeZone;
 
 public class NotesListsFragment extends Fragment {
 
-    public interface OnNoteListener{
+    public interface OnNoteListener {
         void onNoteClick(int position, ArrayList<Note> mNotes);
     }
 
@@ -47,46 +49,13 @@ public class NotesListsFragment extends Fragment {
     private NoteRepository mNoteRepository;
     private Snackbar snackbar;
 
-    /*
-    // Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    */
-
     public NotesListsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     */
-    // Rename and change types and number of parameters
-    /*
-    public static NotesListsFragment newInstance(String param1, String param2) {
-        NotesListsFragment fragment = new NotesListsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-     */
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-         */
     }
 
     @Override
@@ -125,10 +94,10 @@ public class NotesListsFragment extends Fragment {
         mNoteRepository.retrieveNotesTask().observe(this, new Observer<List<Note>>() {
             @Override
             public void onChanged(@Nullable List<Note> notes) {
-                if(mNotes.size() > 0){
+                if (mNotes.size() > 0) {
                     mNotes.clear();
                 }
-                if(notes != null){
+                if (notes != null) {
                     mNotes.addAll(notes);
                 }
                 mNoteRecyclerAdapter.notifyDataSetChanged();
@@ -163,7 +132,7 @@ public class NotesListsFragment extends Fragment {
         @Override
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
             int position = viewHolder.getAdapterPosition();
-            deleteNote(mNotes.get(position),position);
+            deleteNote(mNotes.get(position), position);
         }
     };
 
@@ -186,7 +155,7 @@ public class NotesListsFragment extends Fragment {
         mOnNoteListener = null;
     }
 
-    //VIEWHOLDER
+    /* VIEWHOLDER */
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView timestamp, title, content;
@@ -207,7 +176,7 @@ public class NotesListsFragment extends Fragment {
         }
     }
 
-    //ADAPTER
+    /* ADAPTER */
     public class NotesRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         private static final String TAG = "NotesRecyclerAdapter";

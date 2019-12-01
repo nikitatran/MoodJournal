@@ -14,7 +14,6 @@ public class LinedEditText extends android.support.v7.widget.AppCompatEditText {
     private Rect mRect;
     private Paint mPaint;
 
-
     // we need this constructor for LayoutInflater
     public LinedEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -25,12 +24,10 @@ public class LinedEditText extends android.support.v7.widget.AppCompatEditText {
         mPaint.setStrokeWidth(2);
         mPaint.setColor(0xFFADC5FF); // Color of the lines on paper
         //use google color picker and  https://convertingcolors.com/hex-color-ADC5FF.html
-
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-
         // get the height of the view
         int height = ((View)this.getParent()).getHeight();
 
@@ -43,9 +40,7 @@ public class LinedEditText extends android.support.v7.widget.AppCompatEditText {
         int baseline = getLineBounds(0, r);
 
         for (int i = 0; i < numberOfLines; i++) {
-
             canvas.drawLine(r.left, baseline + 1, r.right, baseline + 1, paint);
-
             baseline += lineHeight;
         }
 

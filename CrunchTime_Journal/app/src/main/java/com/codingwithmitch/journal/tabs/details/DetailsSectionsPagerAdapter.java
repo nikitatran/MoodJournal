@@ -6,18 +6,14 @@ import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 import com.codingwithmitch.journal.R;
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
- */
 public class DetailsSectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.details_tab_text_1, R.string.details_tab_text_2};//, R.string.details_tab_text_3};
+    private static final int[] TAB_TITLES = new int[]{R.string.details_tab_text_1, R.string.details_tab_text_2};
+    private static final int NUM_TABS = 2;
     private final Context mContext;
 
     public DetailsSectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -29,7 +25,6 @@ public class DetailsSectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        Log.d("getItem", position + " called");
         Fragment fragment = null;
         switch(position){
             case 0:
@@ -38,13 +33,6 @@ public class DetailsSectionsPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 fragment = new SelectedNoteAnalysisFragment();
                 break;
-            /*case 2:
-                fragment = new EmotionFragment();
-                break;
-
-             */
-
-
         }
         return fragment;
     }
@@ -57,8 +45,6 @@ public class DetailsSectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        // how many pages to show
-        //return 3;
-        return 2;
+        return NUM_TABS;
     }
 }

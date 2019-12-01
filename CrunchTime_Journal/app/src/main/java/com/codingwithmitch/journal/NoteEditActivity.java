@@ -2,20 +2,17 @@ package com.codingwithmitch.journal;
 
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.input.InputManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,8 +28,7 @@ public class NoteEditActivity extends AppCompatActivity implements
         GestureDetector.OnDoubleTapListener,
         View.OnClickListener,
         TextWatcher,
-        AsyncResponse
-{
+        AsyncResponse {
 
     private static final String TAG = "NoteEditActivity";
     private static final int EDIT_MODE_ENABLED = 1;
@@ -46,16 +42,16 @@ public class NoteEditActivity extends AppCompatActivity implements
     private ImageButton mCheck, mBackArrow;
     private View mOverlay;
 
-
     // vars
     private boolean mIsNewNote;
+    private NoteRepository mNoteRepository;
     private Note mNoteInitial;
+    private Note mNoteFinal;
     private GestureDetector mGestureDetector;
     private int mMode;
-    private NoteRepository mNoteRepository;
-    private Note mNoteFinal;
-    //Api Call
-    ParallelDotsApi api = new ParallelDotsApi ();
+
+    // api
+    ParallelDotsApi api = new ParallelDotsApi();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,25 +73,22 @@ public class NoteEditActivity extends AppCompatActivity implements
 
         setListeners();
 
-        if(getIncomingIntent()){
+        if (getIncomingIntent()) {
             setNewNoteProperties();
             enableEditMode();
-        }
-        else{
+        } else {
             setNoteProperties();
             disableContentInteraction();
         }
     }
 
     //Save Changes either changes based if it's a new note or a note that's been updated
-    private void saveChanges(){
-        if(mIsNewNote){
+    private void saveChanges() {
+        if (mIsNewNote) {
             saveNewNote();
-            Log.d("whatstheID", mNoteFinal.getId()+" (in savechanges)");
-        }else{
+        } else {
             updateNote();
-            Log.d("whatstheID", mNoteFinal.getId()+" (in updatenote)");
-            api.setNote(mNoteFinal, mNoteRepository, false);
+            api.setNote(mNoteFinal, mNoteRepository);
             api.apiCall(mNoteFinal.getContent());
         }
     }
@@ -106,26 +99,9 @@ public class NoteEditActivity extends AppCompatActivity implements
 
     public void saveNewNote() {
         mNoteRepository.insertNoteTask(mNoteFinal, this);
-        /*
-            issue that occurred:
-            so the logic here is new note created -> api call -> api edits database row
-            that way the note can appear instantaneously to the user while the analysis runs in the background
-            otherwise, the new note would only be created once the api call is done
-            so there would be a lag in when the note appears in the recyclerview
-
-            when creating a new note, the id aka primary key is always at 0 for some reason
-            which does not reflect the actual primary key when you look in the database
-            so updating a newly created entry wouldn't work because DAO can't find primary key 0
-            which is why i had the issue where newly created notes would not have emotion values,
-            while edited notes did. edited notes had the correct id so the DAO could update the
-            corresponding entry.
-
-            the AsyncResponse interface is used to grab the primary id returned by InsertAsyncTask and
-            pass it over to this class so it can be used
-         */
     }
 
-    private void setListeners(){
+    private void setListeners() {
         mGestureDetector = new GestureDetector(this, this);
         mLinedEditText.setOnTouchListener(this);
         mCheck.setOnClickListener(this);
@@ -135,8 +111,8 @@ public class NoteEditActivity extends AppCompatActivity implements
         mOverlay.setOnClickListener(this);
     }
 
-    private boolean getIncomingIntent(){
-        if(getIntent().hasExtra("selected_note")){
+    private boolean getIncomingIntent() {
+        if (getIntent().hasExtra("selected_note")) {
             mNoteInitial = getIntent().getParcelableExtra("selected_note");
 
             mNoteFinal = new Note();
@@ -154,7 +130,7 @@ public class NoteEditActivity extends AppCompatActivity implements
         return true;
     }
 
-    private void disableContentInteraction(){
+    private void disableContentInteraction() {
         mLinedEditText.setKeyListener(null);
         mLinedEditText.setFocusable(false);
         mLinedEditText.setFocusableInTouchMode(false);
@@ -162,7 +138,7 @@ public class NoteEditActivity extends AppCompatActivity implements
         mLinedEditText.clearFocus();
     }
 
-    private void enableContentInteraction(){
+    private void enableContentInteraction() {
         mLinedEditText.setKeyListener(new EditText(this).getKeyListener());
         mLinedEditText.setFocusable(true);
         mLinedEditText.setFocusableInTouchMode(true);
@@ -170,7 +146,7 @@ public class NoteEditActivity extends AppCompatActivity implements
         mLinedEditText.requestFocus();
     }
 
-    private void enableEditMode(){
+    private void enableEditMode() {
         mBackArrowContainer.setVisibility(View.GONE);
         mCheckContainer.setVisibility(View.VISIBLE);
 
@@ -183,14 +159,13 @@ public class NoteEditActivity extends AppCompatActivity implements
 
         //show soft keyboard
         View view = this.getCurrentFocus();
-        if(view != null){
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(view, 0);
         }
     }
 
     private void disableEditMode() {
-        Log.d(TAG, "disableEditMode: called.");
         mBackArrowContainer.setVisibility(View.VISIBLE);
         mCheckContainer.setVisibility(View.GONE);
 
@@ -201,34 +176,34 @@ public class NoteEditActivity extends AppCompatActivity implements
 
         //hide soft keyboard
         View view = this.getCurrentFocus();
-        if(view != null){
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
 
         disableContentInteraction();
     }
+
     //take out empty characters (new line and spaces) from string
-    private String trimString(String toTrim){
+    private String trimString(String toTrim) {
         String str = toTrim;
         str = str.replace("\n", "");
         str = str.replace(" ", "");
         return str;
     }
 
-    private void saveToDatabase(){
+    private void saveToDatabase() {
         // Check if they typed anything into the note. Don't want to save an empty note.
         String content = trimString(mLinedEditText.getText().toString());
         String title = trimString(mEditTitle.getText().toString());
 
         //only save note to database if there is content in the entry -- title can be blank
-        if(content.length() > 0){
+        if (content.length() > 0) {
             //if title remains blank, set title to "Untitled note"
-            if(title.length() == 0){
+            if (title.length() == 0) {
                 //mViewTitle.setText("Untitled note");
                 mNoteFinal.setTitle("Untitled note");
-            }
-            else mNoteFinal.setTitle(mEditTitle.getText().toString());
+            } else mNoteFinal.setTitle(mEditTitle.getText().toString());
             mNoteFinal.setContent(mLinedEditText.getText().toString());
             String timestamp = Utility.getCurrentEpochMilli();
             mNoteFinal.setTimestamp(timestamp);
@@ -237,8 +212,8 @@ public class NoteEditActivity extends AppCompatActivity implements
             Log.d(TAG, "disableEditMode: final: " + mNoteFinal.toString());
 
             // If the note was altered, save it.
-            if(!mNoteFinal.getContent().equals(mNoteInitial.getContent())
-                    || !mNoteFinal.getTitle().equals(mNoteInitial.getTitle())){
+            if (!mNoteFinal.getContent().equals(mNoteInitial.getContent())
+                    || !mNoteFinal.getTitle().equals(mNoteInitial.getTitle())) {
                 Log.d(TAG, "disableEditMode: saving edited note");
 
                 saveChanges();
@@ -246,7 +221,7 @@ public class NoteEditActivity extends AppCompatActivity implements
         }
     }
 
-    private void setNewNoteProperties(){
+    private void setNewNoteProperties() {
         mViewTitle.setText("Untitled note");
         mEditTitle.setHint("Your title here");
         mLinedEditText.setHint("Tap to type");
@@ -255,7 +230,7 @@ public class NoteEditActivity extends AppCompatActivity implements
         mNoteInitial = new Note();
     }
 
-    private void setNoteProperties(){
+    private void setNoteProperties() {
         mViewTitle.setText(mNoteInitial.getTitle());
         mEditTitle.setText(mNoteInitial.getTitle());
         mLinedEditText.setText(mNoteInitial.getContent());
@@ -274,83 +249,38 @@ public class NoteEditActivity extends AppCompatActivity implements
 
     @Override
     public boolean onDoubleTap(MotionEvent motionEvent) {
-        Log.d(TAG, "onDoubleTap: double tapped.");
         enableEditMode();
         return false;
     }
 
     @Override
-    public boolean onDoubleTapEvent(MotionEvent motionEvent) {
-        return false;
-    }
-
-    @Override
-    public boolean onDown(MotionEvent motionEvent) {
-        return false;
-    }
-
-    @Override
-    public void onShowPress(MotionEvent motionEvent) {
-
-    }
-
-    @Override
-    public boolean onSingleTapUp(MotionEvent motionEvent) {
-        return false;
-    }
-
-    @Override
-    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-        return false;
-    }
-
-    @Override
-    public void onLongPress(MotionEvent motionEvent) {
-
-    }
-
-    @Override
-    public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-        return false;
-    }
-
-    @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.toolbar_back_arrow:{
+        switch (view.getId()) {
+            case R.id.toolbar_back_arrow: {
                 saveToDatabase();
                 //send back edited title and content to details activity so
                 //view can be updated with edits
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("title",mNoteFinal.getTitle());
-                returnIntent.putExtra("content",mNoteFinal.getContent());
-                setResult(RESULT_OK,returnIntent);
+                returnIntent.putExtra("title", mNoteFinal.getTitle());
+                returnIntent.putExtra("content", mNoteFinal.getContent());
+                setResult(RESULT_OK, returnIntent);
                 finish();
                 break;
             }
-            case R.id.toolbar_check:{
+            case R.id.toolbar_check: {
                 disableEditMode();
                 mOverlay.setClickable(true);
                 break;
             }
-            case R.id.note_text_title:{
+            case R.id.note_text_title: {
                 enableEditMode();
                 mEditTitle.requestFocus();
                 mEditTitle.setSelection(mEditTitle.length());
                 break;
             }
-            /*
-                overlay is used
-                to catch first click onto edittext
-                and set the cursor to the end
 
-                setting cursor should only happen once;
-                if cursor set in enableEditMode() or onSingleTapConfirmed or in a edittext listener,
-                then everytime the user clicks on the screen the cursor would jump to the end
-                which is annoying if you're trying to fix a typo in the middle of a word
-             */
-            case R.id.overlay:{
-                Log.d("NoteEditActivity", "overlay clicked");
+            //overlay is used to catch first click on edittext and set cursor to end
+            case R.id.overlay: {
                 mOverlay.setClickable(false);
                 mLinedEditText.setSelection(mLinedEditText.getText().length());
                 enableEditMode();
@@ -361,10 +291,9 @@ public class NoteEditActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        if(mMode == EDIT_MODE_ENABLED){
+        if (mMode == EDIT_MODE_ENABLED) {
             onClick(mCheck);
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
     }
@@ -379,14 +308,9 @@ public class NoteEditActivity extends AppCompatActivity implements
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mMode = savedInstanceState.getInt("mode");
-        if(mMode == EDIT_MODE_ENABLED){
+        if (mMode == EDIT_MODE_ENABLED) {
             enableEditMode();
         }
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
     }
 
     @Override
@@ -395,18 +319,44 @@ public class NoteEditActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void afterTextChanged(Editable editable) {
-
-    }
-
-    @Override
     public void processFinish(long output) {
-        mNoteFinal.setId((int)output);
-        Log.d("whatstheID", mNoteFinal.getId()+" (in processFinish)");
+        mNoteFinal.setId((int) output);
+        //need to update new note with ID from database so it can be updated with emotion values
 
-        api.setNote(mNoteFinal, mNoteRepository, true);
+        api.setNote(mNoteFinal, mNoteRepository);
         api.apiCall(mNoteFinal.getContent());
     }
+
+    /* HERE LIES UNUSED FUNCTIONS THAT MUST BE DECLARED FOR IMPLEMENTED INTERFACES */
+
+    @Override
+    public boolean onDoubleTapEvent(MotionEvent motionEvent) { return false; }
+
+    @Override
+    public boolean onDown(MotionEvent motionEvent) { return false; }
+
+    @Override
+    public void onShowPress(MotionEvent motionEvent) {}
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent motionEvent) { return false; }
+
+    @Override
+    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) { return false; }
+
+    @Override
+    public void onLongPress(MotionEvent motionEvent) {}
+
+    @Override
+    public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) { return false; }
+
+    //////////////
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+    @Override
+    public void afterTextChanged(Editable editable) {}
 }
 
 
