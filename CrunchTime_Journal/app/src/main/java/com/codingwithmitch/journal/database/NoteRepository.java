@@ -42,6 +42,9 @@ public class NoteRepository {
     public LiveData<List<Note>> retrieveNotes7daysTask(long time) {
         return mNoteDatabase.getNoteDao().getNotes7Days(time);
     }
+    public LiveData<List<Note>> retrieveNotes30daysTask(long time) {
+        return mNoteDatabase.getNoteDao().getNotes30Days(time);
+    }
 
     public LiveData<List<Note>> getNoteById(int id) {
         return mNoteDatabase.getNoteDao().getOneNote(id);
