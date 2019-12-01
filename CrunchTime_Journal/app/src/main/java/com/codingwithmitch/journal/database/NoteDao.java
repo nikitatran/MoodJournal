@@ -23,10 +23,7 @@ public interface NoteDao {
     LiveData<List<Note>> getNotes();
 
     @Query("SELECT * FROM notes WHERE :currentTime < CAST(timestamp AS LONG)")
-    LiveData<List<Note>> getNotes7Days(long currentTime);
-
-    @Query("SELECT * FROM notes WHERE :currentTime < CAST(timestamp AS LONG)")
-    LiveData<List<Note>> getNotes30Days(long currentTime);
+    LiveData<List<Note>> getNotesByTime(long currentTime);
 
     @Query("SELECT * FROM notes WHERE id = :id ")
     LiveData<List<Note>> getOneNote(int id);

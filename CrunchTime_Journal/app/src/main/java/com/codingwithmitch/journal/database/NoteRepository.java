@@ -38,11 +38,8 @@ public class NoteRepository {
         return mNoteDatabase.getNoteDao().getNotes();
     }
 
-    public LiveData<List<Note>> retrieveNotes7daysTask(long time) {
-        return mNoteDatabase.getNoteDao().getNotes7Days(time);
-    }
-    public LiveData<List<Note>> retrieveNotes30daysTask(long time) {
-        return mNoteDatabase.getNoteDao().getNotes30Days(time);
+    public LiveData<List<Note>> retrieveNotesByTimeTask(long time) {
+        return mNoteDatabase.getNoteDao().getNotesByTime(time);
     }
 
     public LiveData<List<Note>> getNoteById(int id) {

@@ -46,11 +46,11 @@ public class BreakdownFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        long timestamp = Long.valueOf(Utility.getCurrentEpochMilli()) - (DateUtils.WEEK_IN_MILLIS);
+        long timestamp7 = Long.valueOf(Utility.getCurrentEpochMilli()) - (DateUtils.WEEK_IN_MILLIS);
         long timestamp30 = Long.valueOf(Utility.getCurrentEpochMilli()) - (DateUtils.YEAR_IN_MILLIS);
 
         mNoteRepository = new NoteRepository(getActivity());
-        mNoteRepository.retrieveNotes7daysTask(timestamp).observe(this, new Observer<List<Note>>() {
+        mNoteRepository.retrieveNotesByTimeTask(timestamp7).observe(this, new Observer<List<Note>>() {
             @Override
             public void onChanged(@Nullable List<Note> notes) {
                 double sad = 0.0;
@@ -82,7 +82,7 @@ public class BreakdownFragment extends Fragment {
             }
         });
 
-        mNoteRepository.retrieveNotes30daysTask(timestamp30).observe(this, new Observer<List<Note>>() {
+        mNoteRepository.retrieveNotesByTimeTask(timestamp30).observe(this, new Observer<List<Note>>() {
             @Override
             public void onChanged(@Nullable List<Note> notes) {
                 double sad = 0;
