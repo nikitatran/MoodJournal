@@ -9,6 +9,11 @@
         2. https://developer.android.com/reference/java/math/RoundingMode
         3. https://developer.android.com/reference/java/text/DecimalFormat
 
+        Twitter Emoji graphics licensing:
+        Copyright 2019 Twitter, Inc and other contributors
+        Code licensed under the MIT License: http://opensource.org/licenses/MIT
+        Graphics licensed under CC-BY 4.0: https://creativecommons.org/licenses/by/4.0/
+
  */
 
 package cpsc4150.projects.journal.tabs.main;
