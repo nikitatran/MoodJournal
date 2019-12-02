@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".DetailsActivity">
+    tools:context="cpsc4150.projects.journal.DetailsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

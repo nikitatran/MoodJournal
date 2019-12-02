@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.codingwithmitch.journal">
+    package="com.projects.journal">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,16 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".DetailsActivity"
+            android:name="cpsc4150.projects.journal.DetailsActivity"
             android:label="@string/title_activity_details"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="cpsc4150.projects.journal.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.codingwithmitch.journal.MainActivity" />
+                android:value="cpsc4150.projects.journal.MainActivity" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="cpsc4150.projects.journal.MainActivity"
 
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -30,7 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NoteEditActivity" />
+        <activity android:name="cpsc4150.projects.journal.NoteEditActivity" />
     </application>
 
 </manifest>

@@ -6,7 +6,7 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="MainActivity">
+    tools:context="cpsc4150.projects.journal.MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.codingwithmitch.journal.LinedEditText
+            <cpsc4150.projects.journal.LinedEditText
                 android:id="@+id/note_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

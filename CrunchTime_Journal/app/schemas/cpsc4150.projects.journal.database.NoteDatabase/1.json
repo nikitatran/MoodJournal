@@ -1,0 +1,87 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "1d5c0ad763b2181e3e0423361469467f",
+    "entities": [
+      {
+        "tableName": "notes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `content` TEXT, `timestamp` TEXT, `bored` REAL NOT NULL, `angry` REAL NOT NULL, `sad` REAL NOT NULL, `fear` REAL NOT NULL, `happy` REAL NOT NULL, `excited` REAL NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "content",
+            "columnName": "content",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bored",
+            "columnName": "bored",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "angry",
+            "columnName": "angry",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sad",
+            "columnName": "sad",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fear",
+            "columnName": "fear",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "happy",
+            "columnName": "happy",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "excited",
+            "columnName": "excited",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"1d5c0ad763b2181e3e0423361469467f\")"
+    ]
+  }
+}
