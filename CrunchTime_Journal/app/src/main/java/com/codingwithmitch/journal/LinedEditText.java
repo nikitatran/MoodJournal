@@ -1,3 +1,10 @@
+/*
+    CrunchTime (Team 8)
+    CPSC 4150 Main Project (Dec 2, 2019)
+    Nikita Tran (nikitat@clemson.edu)
+    Taylor Miller (tjm2@clemson.edu)
+ */
+
 package com.codingwithmitch.journal;
 
 import android.content.Context;
@@ -7,6 +14,10 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
+/*
+    This is a custom EditText that imitates lined notepad paper.
+    Referenced from https://codingwithmitch.com/courses/sqlite-room-persistence-android/drawing-parallel-lines-edittext/
+ */
 public class LinedEditText extends android.support.v7.widget.AppCompatEditText {
 
     private static final String TAG = "LinedEditText";
@@ -14,16 +25,18 @@ public class LinedEditText extends android.support.v7.widget.AppCompatEditText {
     private Rect mRect;
     private Paint mPaint;
 
-    // we need this constructor for LayoutInflater
+    //Necessary constructor for LayoutInflater
     public LinedEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         mRect = new Rect();
         mPaint = new Paint();
+
+        //Set paint properties
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(2);
-        mPaint.setColor(0xFFADC5FF); // Color of the lines on paper
-        //use google color picker and  https://convertingcolors.com/hex-color-ADC5FF.html
+        mPaint.setColor(0xFFADC5FF); //Color of the lines on paper
+        // use google color picker to find a color
+        // and https://convertingcolors.com/hex-color-ADC5FF.html to convert the hex
     }
 
     @Override

@@ -1,3 +1,13 @@
+/*
+    CrunchTime (Team 8)
+    CPSC 4150 Main Project (Dec 2, 2019)
+    Nikita Tran (nikitat@clemson.edu)
+    Taylor Miller (tjm2@clemson.edu)
+
+    References used:
+        1. https://codingwithmitch.com/courses/sqlite-room-persistence-android/queries-using-livedata/
+ */
+
 package com.codingwithmitch.journal.tabs.main;
 
 import android.os.Bundle;
@@ -52,7 +62,7 @@ public class BreakdownFragment extends Fragment {
 
         //Variables that represent milliseconds in a week, and in 30 days
         long timestamp7 = Long.valueOf(Utility.getCurrentEpochMilli()) - (DateUtils.WEEK_IN_MILLIS);
-        long timestamp30 = Long.valueOf(Utility.getCurrentEpochMilli()) - (DateUtils.YEAR_IN_MILLIS);
+        long timestamp30 = Long.valueOf(Utility.getCurrentEpochMilli()) - (DateUtils.DAY_IN_MILLIS * 7);
 
         mNoteRepository = new NoteRepository(getActivity());
 
@@ -97,6 +107,8 @@ public class BreakdownFragment extends Fragment {
          * An observer that listens for any updates in the database.
          * When the database is updated, the emotional analysis that calculates emotions in a
          * thirty day period is recalculated. Then, setView30 is called to update the view.
+         *
+         * Observer based off of reference 1
          */
         mNoteRepository.retrieveNotesByTimeTask(timestamp30).observe(this, new Observer<List<Note>>() {
             @Override

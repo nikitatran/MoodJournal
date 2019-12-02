@@ -1,3 +1,9 @@
+/*
+    CrunchTime (Team 8)
+    CPSC 4150 Main Project (Dec 2, 2019)
+    Nikita Tran (nikitat@clemson.edu)
+    Taylor Miller (tjm2@clemson.edu)
+ */
 package com.codingwithmitch.journal.util;
 
 import android.os.AsyncTask;
@@ -22,6 +28,8 @@ import okhttp3.Response;
  * ParallelDotsApi class handles the API call to ParallelDots that calculates emotions based off of
  * a given text.
  * Stores the calculated values into a note before the note is stored into the database
+ *
+ * Reference: http://apis.paralleldots.com/text_docs/index.html#v5-emotion
  */
 public class ParallelDotsApi {
     String api_key = "jFEcMS6z1DJ9Y2abzJO6tyQ3FarcVzp2LV5gAW9fz3o";

@@ -1,3 +1,9 @@
+/*
+    CrunchTime (Team 8)
+    CPSC 4150 Main Project (Dec 2, 2019)
+    Nikita Tran (nikitat@clemson.edu)
+    Taylor Miller (tjm2@clemson.edu)
+ */
 package com.codingwithmitch.journal;
 
 import android.content.Intent;
@@ -21,20 +27,31 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /* SET UP TAB LAYOUT */
         MainSectionsPagerAdapter sectionsPagerAdapter = new MainSectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-        Log.d("mainactivity", "oncreate called");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        wasClicked = false;
+        wasClicked = false; //reset click listener when user returns from another fragment/activity
     }
 
+    /**
+     * From interface OnNoteListener defined in NotesListsFragment.
+     * Defines what happens when a note in the RecyclerView was clicked.
+     *
+     * pre: note was clicked in RecyclerView
+     * post: note details page opens
+     *
+     * @param position position of item clicked in RecyclerView
+     * @param mNotes list of notes
+     */
     @Override
     public void onNoteClick(int position, ArrayList<Note> mNotes) {
         if(!wasClicked) {

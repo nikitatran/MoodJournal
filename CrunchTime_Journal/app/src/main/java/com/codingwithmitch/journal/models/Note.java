@@ -1,3 +1,12 @@
+/*
+    CrunchTime (Team 8)
+    CPSC 4150 Main Project (Dec 2, 2019)
+    Nikita Tran (nikitat@clemson.edu)
+    Taylor Miller (tjm2@clemson.edu)
+
+    References used:
+        1. https://codingwithmitch.com/courses/sqlite-room-persistence-android/sending-data-new-activity-intent-extras/
+ */
 package com.codingwithmitch.journal.models;
 
 import android.arch.persistence.room.ColumnInfo;
@@ -22,7 +31,7 @@ public class Note implements Parcelable {
     @ColumnInfo(name = "timestamp")
     private String timestamp;
 
-    //Adding New Columns for Emotions
+    /* EMOTION COLUMNS */
     @ColumnInfo(name = "bored")
     private double bored;
 
@@ -98,7 +107,6 @@ public class Note implements Parcelable {
     public void setHappy(double happy) {this.happy = happy;}
 
     public double getExcited() {return excited;}
-
     public void setExcited(double excited) {this.excited = excited;}
 
     @Override
@@ -117,12 +125,8 @@ public class Note implements Parcelable {
                 '}';
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
     /* TO MAKE NOTE PARCELABLE */
+    //referenced from reference 1
     protected Note(Parcel in) {
         id = in.readInt();
         title = in.readString();
@@ -160,5 +164,10 @@ public class Note implements Parcelable {
         parcel.writeDouble(fear);
         parcel.writeDouble(happy);
         parcel.writeDouble(excited);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 }

@@ -1,3 +1,10 @@
+/*
+    CrunchTime (Team 8)
+    CPSC 4150 Main Project (Dec 2, 2019)
+    Nikita Tran (nikitat@clemson.edu)
+    Taylor Miller (tjm2@clemson.edu)
+ */
+
 package com.codingwithmitch.journal.tabs.main;
 
 import android.content.Context;
@@ -51,7 +58,7 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
      * post: title of tabs will be set in view
      *
      * @param position tab number (starting from 0)
-     * @return
+     * @return tab titles
      */
     @Nullable
     @Override

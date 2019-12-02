@@ -1,3 +1,14 @@
+/*
+    CrunchTime (Team 8)
+    CPSC 4150 Main Project (Dec 2, 2019)
+    Nikita Tran (nikitat@clemson.edu)
+    Taylor Miller (tjm2@clemson.edu)
+
+    References used:
+        1. https://codingwithmitch.com/courses/sqlite-room-persistence-android/queries-using-livedata/
+        2. https://stackoverflow.com/questions/6465680/how-to-determine-the-screen-width-in-terms-of-dp-or-dip-at-runtime-in-android
+ */
+
 package com.codingwithmitch.journal.tabs.main;
 
 import android.arch.lifecycle.Observer;
@@ -28,8 +39,8 @@ import com.codingwithmitch.journal.NoteEditActivity;
 import com.codingwithmitch.journal.R;
 import com.codingwithmitch.journal.models.Note;
 import com.codingwithmitch.journal.database.NoteRepository;
-import com.codingwithmitch.journal.util.ColumnSpacingItemDecorator;
-import com.codingwithmitch.journal.util.VerticalSpacingItemDecorator;
+import com.codingwithmitch.journal.util.TwoColumnSpacingItemDecorator;
+import com.codingwithmitch.journal.util.RowSpacingItemDecorator;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,7 +49,6 @@ import java.util.TimeZone;
 
 
 public class NotesListsFragment extends Fragment {
-
     public interface OnNoteListener {
         void onNoteClick(int position, ArrayList<Note> mNotes);
     }
@@ -90,26 +100,28 @@ public class NotesListsFragment extends Fragment {
 
         /* RECYCLERVIEW INITIALIZATION */
 
+        //referenced from reference 2
         DisplayMetrics displayMetrics = getActivity().getResources().getDisplayMetrics();
         float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        /////////////////////////////
 
         //Use a 2-column layout if current display width is >= 600dp, else use a 1-column layout
         if(dpWidth >= 600){
             GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
             mRecyclerView.setLayoutManager(gridLayoutManager);
-            ColumnSpacingItemDecorator itemDecorator = new ColumnSpacingItemDecorator(COLUMN_SPACING, VERTICAL_SPACING);
+            TwoColumnSpacingItemDecorator itemDecorator = new TwoColumnSpacingItemDecorator(COLUMN_SPACING, VERTICAL_SPACING);
             mRecyclerView.addItemDecoration(itemDecorator);
         }
         else {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
             mRecyclerView.setLayoutManager(linearLayoutManager);
-            VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(VERTICAL_SPACING);
+            RowSpacingItemDecorator itemDecorator = new RowSpacingItemDecorator(VERTICAL_SPACING);
             mRecyclerView.addItemDecoration(itemDecorator);
         }
 
         //Touch callback for list items
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
+        new ItemTouchHelper(touchHelper).attachToRecyclerView(mRecyclerView);
 
         //Set adapter
         mNoteRecyclerAdapter = new NotesRecyclerAdapter(mNotes);
@@ -130,6 +142,8 @@ public class NotesListsFragment extends Fragment {
      *
      * pre: RecyclerView exists
      * post: if database isn't empty, RecyclerView reflects what is currently in the database
+     * 
+     * Referenced from reference 1
      */
     private void retrieveNotes() {
         mNoteRepository.retrieveNotesTask().observe(this, new Observer<List<Note>>() {
@@ -180,7 +194,7 @@ public class NotesListsFragment extends Fragment {
     }
 
     //Callback to delete a note after it is swiped off the screen
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+    ItemTouchHelper.SimpleCallback touchHelper = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
         @Override
         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
             return false;
@@ -211,6 +225,7 @@ public class NotesListsFragment extends Fragment {
         }
     }
 
+    //Turn off listener after fragment is destroyed
     @Override
     public void onDetach() {
         super.onDetach();
@@ -234,6 +249,10 @@ public class NotesListsFragment extends Fragment {
         //defines what will happen if a list item is clicked
         @Override
         public void onClick(View view) {
+            //onNoteClick defined in MainActivity; sends over note that was clicked in the list
+            //to MainActivity so it can start a new intent to DetailsActivity where
+            //the title and content note that was passed into the function below
+            //can be displayed to the user
             mOnNoteListener.onNoteClick(getAdapterPosition(), mNotes);
         }
     }
@@ -272,6 +291,12 @@ public class NotesListsFragment extends Fragment {
             }
         }
 
+        /**
+         * pre: mNotes exists
+         * post: number of elements in mNotes returned
+         *
+         * @return the size of the notes array
+         */
         @Override
         public int getItemCount() {
             return mNotes.size();
