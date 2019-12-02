@@ -3,6 +3,9 @@
     CPSC 4150 Main Project (Dec 2, 2019)
     Nikita Tran (nikitat@clemson.edu)
     Taylor Miller (tjm2@clemson.edu)
+
+    References used:
+        1. https://developer.android.com/training/basics/intents/result
  */
 package cpsc4150.projects.journal;
 
@@ -103,6 +106,7 @@ public class DetailsActivity extends AppCompatActivity {
     //and set intent extra to edited note
     //so if the user edits again without going back,
     //the edits will reflect in NoteEditActivity as well
+    //reference 1 used
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch(resultCode) {

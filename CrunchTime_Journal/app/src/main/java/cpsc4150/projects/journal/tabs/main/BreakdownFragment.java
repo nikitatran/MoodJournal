@@ -6,6 +6,9 @@
 
     References used:
         1. https://codingwithmitch.com/courses/sqlite-room-persistence-android/queries-using-livedata/
+        2. https://developer.android.com/reference/java/math/RoundingMode
+        3. https://developer.android.com/reference/java/text/DecimalFormat
+
  */
 
 package cpsc4150.projects.journal.tabs.main;
@@ -154,6 +157,8 @@ public class BreakdownFragment extends Fragment {
      * @param bored a double value that represents the percentage of the bored emotion calculated from a certain note input
      * Post-Condition: Sets the Breakdown Fragment view to reflect the emotion values that are passed in through the functions that the
      * user will see
+     *
+     *  DecimalFormat and RoundingMode referenced from 2 & 3
      */
     private void setViews(View view, double sad, double happy, double angry, double excited, double fear, double bored) {
         DecimalFormat df = new DecimalFormat("##.##");
@@ -194,6 +199,8 @@ public class BreakdownFragment extends Fragment {
      * @param bored a double value that represents the percentage of the bored emotion calculated from a certain note input
      * Post-Condition: Sets the Breakdown Fragment view to reflect the emotion values that are passed in through the functions that the
      * user will see
+     *
+     * DecimalFormat and RoundingMode referenced from 2 & 3
      */
     private void setViews30(View view, double sad, double happy, double angry, double excited, double fear, double bored) {
         DecimalFormat df = new DecimalFormat("#.##");

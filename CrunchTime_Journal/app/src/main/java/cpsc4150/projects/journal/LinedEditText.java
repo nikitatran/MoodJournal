@@ -3,6 +3,9 @@
     CPSC 4150 Main Project (Dec 2, 2019)
     Nikita Tran (nikitat@clemson.edu)
     Taylor Miller (tjm2@clemson.edu)
+
+    References used:
+        1. https://codingwithmitch.com/courses/sqlite-room-persistence-android/drawing-parallel-lines-edittext/
  */
 
 package cpsc4150.projects.journal;
@@ -16,7 +19,7 @@ import android.view.View;
 
 /*
     This is a custom EditText that imitates lined notepad paper.
-    Referenced from https://codingwithmitch.com/courses/sqlite-room-persistence-android/drawing-parallel-lines-edittext/
+    Reference 1 used
  */
 public class LinedEditText extends android.support.v7.widget.AppCompatEditText {
 

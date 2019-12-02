@@ -6,6 +6,8 @@
 
     References used:
         1. https://codingwithmitch.com/courses/sqlite-room-persistence-android/queries-using-livedata/
+        2. https://developer.android.com/reference/java/math/RoundingMode
+        3. https://developer.android.com/reference/java/text/DecimalFormat
  */
 
 package cpsc4150.projects.journal.tabs.details;
@@ -87,6 +89,8 @@ public class SelectedNoteAnalysisFragment extends Fragment {
      *
      * @param view fragment layout
      * @param note the note the user selected to view
+     *
+     * DecimalFormat and RoundingMode referenced from 2 & 3
      */
     private void setViews(View view, Note note){
         DecimalFormat df = new DecimalFormat("#.##");

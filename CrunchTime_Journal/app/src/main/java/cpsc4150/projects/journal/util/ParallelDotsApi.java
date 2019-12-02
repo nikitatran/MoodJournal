@@ -3,6 +3,9 @@
     CPSC 4150 Main Project (Dec 2, 2019)
     Nikita Tran (nikitat@clemson.edu)
     Taylor Miller (tjm2@clemson.edu)
+
+    References used:
+        1. http://apis.paralleldots.com/text_docs/index.html#v5-emotion
  */
 package cpsc4150.projects.journal.util;
 
@@ -29,7 +32,7 @@ import okhttp3.Response;
  * a given text.
  * Stores the calculated values into a note before the note is stored into the database
  *
- * Reference: http://apis.paralleldots.com/text_docs/index.html#v5-emotion
+ * Reference 1 used
  */
 public class ParallelDotsApi {
     String api_key = "jFEcMS6z1DJ9Y2abzJO6tyQ3FarcVzp2LV5gAW9fz3o";
