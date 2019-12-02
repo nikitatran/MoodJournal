@@ -22,6 +22,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Displays the Breakdown Screen tab for the Breakdown page located on the main screen
+ */
 public class BreakdownFragment extends Fragment {
 
     private static final String TAG = "breakdown";
@@ -46,10 +49,19 @@ public class BreakdownFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        //Variables that represent milliseconds in a week, and in 30 days
         long timestamp7 = Long.valueOf(Utility.getCurrentEpochMilli()) - (DateUtils.WEEK_IN_MILLIS);
         long timestamp30 = Long.valueOf(Utility.getCurrentEpochMilli()) - (DateUtils.YEAR_IN_MILLIS);
 
         mNoteRepository = new NoteRepository(getActivity());
+
+        /**
+         * An observer that listens for any updates in the database.
+         * When the database is updated, the emotional analysis that calculates emotions in a
+         * seven day period is recalculated. Then, setView is called to update the view.
+         */
+
         mNoteRepository.retrieveNotesByTimeTask(timestamp7).observe(this, new Observer<List<Note>>() {
             @Override
             public void onChanged(@Nullable List<Note> notes) {
@@ -81,7 +93,11 @@ public class BreakdownFragment extends Fragment {
                 }
             }
         });
-
+        /**
+         * An observer that listens for any updates in the database.
+         * When the database is updated, the emotional analysis that calculates emotions in a
+         * thirty day period is recalculated. Then, setView30 is called to update the view.
+         */
         mNoteRepository.retrieveNotesByTimeTask(timestamp30).observe(this, new Observer<List<Note>>() {
             @Override
             public void onChanged(@Nullable List<Note> notes) {
@@ -115,6 +131,19 @@ public class BreakdownFragment extends Fragment {
         });
     }
 
+    /**
+     * Function setViews display the view reflecting the past seven days worth of emotions for the user to see.
+     * Pre-condition: Requires the following variables of:
+     * @param view, the current view of the activity
+     * @param sad a double value that represents the percentage of the sadness emotion calculated from a certain note input
+     * @param happy a double value that represents the percentage of the happiness emotion calculated from a certain note input
+     * @param angry a double value that represents the percentage of the anger emotion calculated from a certain note input
+     * @param excited a double value that represents the percentage of the excited emotion calculated from a certain note input
+     * @param fear a double value that represents the percentage of the fear emotion calculated from a certain note input
+     * @param bored a double value that represents the percentage of the bored emotion calculated from a certain note input
+     * Post-Condition: Sets the Breakdown Fragment view to reflect the emotion values that are passed in through the functions that the
+     * user will see
+     */
     private void setViews(View view, double sad, double happy, double angry, double excited, double fear, double bored) {
         DecimalFormat df = new DecimalFormat("##.##");
         df.setRoundingMode(RoundingMode.DOWN);
@@ -142,7 +171,19 @@ public class BreakdownFragment extends Fragment {
         fearValue.setText(df.format(fearAvg) + "%");
     }
 
-
+    /**
+     * Function setViews display the view reflecting the past thirty days worth of emotions for the user to see.
+     * Pre-condition: Requires the following variables of:
+     * @param view, the current view of the activity
+     * @param sad a double value that represents the percentage of the sadness emotion calculated from a certain note input
+     * @param happy a double value that represents the percentage of the happiness emotion calculated from a certain note input
+     * @param angry a double value that represents the percentage of the anger emotion calculated from a certain note input
+     * @param excited a double value that represents the percentage of the excited emotion calculated from a certain note input
+     * @param fear a double value that represents the percentage of the fear emotion calculated from a certain note input
+     * @param bored a double value that represents the percentage of the bored emotion calculated from a certain note input
+     * Post-Condition: Sets the Breakdown Fragment view to reflect the emotion values that are passed in through the functions that the
+     * user will see
+     */
     private void setViews30(View view, double sad, double happy, double angry, double excited, double fear, double bored) {
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.DOWN);

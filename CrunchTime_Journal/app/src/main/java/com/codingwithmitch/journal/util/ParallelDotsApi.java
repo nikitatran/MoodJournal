@@ -1,7 +1,6 @@
 package com.codingwithmitch.journal.util;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 
 import com.codingwithmitch.journal.database.NoteRepository;
@@ -19,6 +18,11 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+ * ParallelDotsApi class handles the API call to ParallelDots that calculates emotions based off of
+ * a given text.
+ * Stores the calculated values into a note before the note is stored into the database
+ */
 public class ParallelDotsApi {
     String api_key = "jFEcMS6z1DJ9Y2abzJO6tyQ3FarcVzp2LV5gAW9fz3o";
     private double dBored;
@@ -31,15 +35,31 @@ public class ParallelDotsApi {
     private Note note;
     private NoteRepository noteRepo;
 
+    /**
+     * Empty constructor
+     */
     public ParallelDotsApi() {
 
     }
 
+    /**
+     * SetNote function sets up the Note and NoteRepository values
+     * Pre-Condition: Requires the following variables of
+     * @param n An instance of a Note
+     * @param repo An instance of a NoteRepository
+     * Post-Condition: Sets the values for the Note and NoteRepository instances
+     */
     public void setNote(Note n, NoteRepository repo) {
         note = n;
         noteRepo = repo;
     }
 
+    /**
+     * apicall functions handles the async API called for ParallelDots emotion analysis
+     * Pre-Condition: Requires a user input string to be analysed
+     * @param stringToAnalyze represents a user input string from a note
+     * Post-Condition: Handles the api call to ParallelDots
+     */
     public void apiCall(String stringToAnalyze) {
         AsyncTaskExample asyncTask = new AsyncTaskExample();
         asyncTask.execute(stringToAnalyze);
