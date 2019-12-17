@@ -50,6 +50,9 @@ public class Note implements Parcelable {
     @ColumnInfo(name = "excited")
     private double excited;
 
+    @ColumnInfo(name = "prominent_emotion")
+    private String prominent_emotion;
+
     public Note(String title, String content, String timestamp) {
         this.title = title;
         this.content = content;
@@ -109,20 +112,37 @@ public class Note implements Parcelable {
     public double getExcited() {return excited;}
     public void setExcited(double excited) {this.excited = excited;}
 
+    public String getProminent_emotion() {
+        return prominent_emotion;
+    }
+    public void setProminent_emotion(String emotion) {
+        this.prominent_emotion = emotion;
+    }
+
+    public void setAll(double happy, double sad, double bored, double excited, double angry, double fear){
+        setAngry(angry);
+        setBored(bored);
+        setSad(sad);
+        setFear(fear);
+        setHappy(happy);
+        setExcited(excited);
+    }
+
     @Override
     public String toString() {
-        return "Note{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", timestamp='" + timestamp + '\'' +
-                ", bored='" + bored + '\'' +
-                ", angry='" + angry + '\'' +
-                ", sad='" + sad + '\'' +
-                ", fear='" + fear + '\'' +
-                ", happy='" + happy + '\'' +
-                ", excited='" + excited + '\'' +
-                '}';
+        return "\nNote{" +
+                "\nid='" + id + '\'' +
+                ",\ntitle='" + title + '\'' +
+                ",\ncontent='" + content + '\'' +
+                ",\ntimestamp='" + timestamp + '\'' +
+                ",\nbored='" + bored + '\'' +
+                ",\nangry='" + angry + '\'' +
+                ",\nsad='" + sad + '\'' +
+                ",\nfear='" + fear + '\'' +
+                ",\nhappy='" + happy + '\'' +
+                ",\nexcited='" + excited + '\'' +
+                ",\nprominent_emotion='" + prominent_emotion + '\'' +
+                "\n}";
     }
 
     /* TO MAKE NOTE PARCELABLE */
@@ -138,6 +158,7 @@ public class Note implements Parcelable {
         fear = in.readDouble();
         happy = in.readDouble();
         excited = in.readDouble();
+        prominent_emotion = in.readString();
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
@@ -164,6 +185,7 @@ public class Note implements Parcelable {
         parcel.writeDouble(fear);
         parcel.writeDouble(happy);
         parcel.writeDouble(excited);
+        parcel.writeString(prominent_emotion);
     }
 
     @Override

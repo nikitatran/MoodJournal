@@ -16,4 +16,11 @@
     <color name="background">#f0f0f0</color>
     <color name="listItem">#fff</color>
     <color name="paper">#fff</color>
+
+    <color name="happy">#ffea00</color>
+    <color name="sad">#87b5ff</color>
+    <color name="angry">#ff0000</color>
+    <color name="bored">#b5b5b5</color>
+    <color name="excited">#ffa200</color>
+    <color name="fear">#8442ff</color>
 </resources>

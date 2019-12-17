@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "1d5c0ad763b2181e3e0423361469467f",
+    "identityHash": "9fd6fe3cb76458aa9973e315680b250d",
     "entities": [
       {
         "tableName": "notes",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `content` TEXT, `timestamp` TEXT, `bored` REAL NOT NULL, `angry` REAL NOT NULL, `sad` REAL NOT NULL, `fear` REAL NOT NULL, `happy` REAL NOT NULL, `excited` REAL NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `content` TEXT, `timestamp` TEXT, `bored` REAL NOT NULL, `angry` REAL NOT NULL, `sad` REAL NOT NULL, `fear` REAL NOT NULL, `happy` REAL NOT NULL, `excited` REAL NOT NULL, `prominent_emotion` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -67,6 +67,12 @@
             "columnName": "excited",
             "affinity": "REAL",
             "notNull": true
+          },
+          {
+            "fieldPath": "prominent_emotion",
+            "columnName": "prominent_emotion",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -81,7 +87,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"1d5c0ad763b2181e3e0423361469467f\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"9fd6fe3cb76458aa9973e315680b250d\")"
     ]
   }
 }

@@ -27,6 +27,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import java.util.Collections;
 import java.util.Date;
 
 import android.view.LayoutInflater;
@@ -44,7 +45,9 @@ import cpsc4150.projects.journal.util.RowSpacingItemDecorator;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 
@@ -235,12 +238,14 @@ public class NotesListsFragment extends Fragment {
     /* VIEWHOLDER */
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView timestamp, title, content;
+        View accent;
 
         public ViewHolder(View itemView) {
             super(itemView);
             timestamp = itemView.findViewById(R.id.note_timestamp);
             title = itemView.findViewById(R.id.note_title);
             content = itemView.findViewById(R.id.note_content);
+            accent = itemView.findViewById(R.id.accent);
 
             //make the items clickable
             itemView.setOnClickListener(this);
@@ -275,19 +280,45 @@ public class NotesListsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            try {
-                //Convert time in milliseconds into a date
-                Long epoch = Long.parseLong(mNotes.get(position).getTimestamp());
-                SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, YYYY\nh:mm a");
-                dateFormat.setTimeZone(TimeZone.getDefault());
-                String timestamp = dateFormat.format(new Date(epoch));
+            //Convert time in milliseconds into a date
+            Long epoch = Long.parseLong(mNotes.get(position).getTimestamp());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, YYYY\nh:mm a");
+            dateFormat.setTimeZone(TimeZone.getDefault());
+            String timestamp = dateFormat.format(new Date(epoch));
 
-                //Set the text shown in each list item
-                holder.timestamp.setText(timestamp);
-                holder.title.setText(mNotes.get(position).getTitle());
-                holder.content.setText(mNotes.get(position).getContent());
-            } catch (NullPointerException e) {
-                Log.e(TAG, "onBindViewHolder: Null Pointer: " + e.getMessage());
+            //Set the text shown in each list item
+            holder.timestamp.setText(timestamp);
+            holder.title.setText(mNotes.get(position).getTitle());
+            holder.content.setText(mNotes.get(position).getContent());
+
+            String emo = mNotes.get(position).getProminent_emotion();
+
+            //TODO set accent color based on highest emotion value
+            if(emo != null) {
+                holder.accent.setVisibility(View.VISIBLE);
+                switch (emo) {
+                    case "happy":
+                        holder.accent.setBackgroundResource(R.color.happy);
+                        break;
+                    case "sad":
+                        holder.accent.setBackgroundResource(R.color.sad);
+                        break;
+                    case "fear":
+                        holder.accent.setBackgroundResource(R.color.fear);
+                        break;
+                    case "bored":
+                        holder.accent.setBackgroundResource(R.color.bored);
+                        break;
+                    case "excited":
+                        holder.accent.setBackgroundResource(R.color.excited);
+                        break;
+                    case "angry":
+                        holder.accent.setBackgroundResource(R.color.angry);
+                        break;
+                }
+            }
+            else {
+                holder.accent.setVisibility(View.GONE);
             }
         }
 

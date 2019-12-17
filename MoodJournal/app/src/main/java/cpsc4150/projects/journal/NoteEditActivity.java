@@ -33,7 +33,7 @@ import cpsc4150.projects.journal.database.async.AsyncResponse;
 import cpsc4150.projects.journal.models.Note;
 import cpsc4150.projects.journal.database.NoteRepository;
 import cpsc4150.projects.journal.util.LinedEditText;
-import cpsc4150.projects.journal.util.ParallelDotsApi;
+import cpsc4150.projects.journal.util.ParallelDotsApi_v5;
 import cpsc4150.projects.journal.util.Utility;
 
 public class NoteEditActivity extends AppCompatActivity implements
@@ -65,7 +65,7 @@ public class NoteEditActivity extends AppCompatActivity implements
     private int mMode;
 
     // api
-    ParallelDotsApi api = new ParallelDotsApi();
+    ParallelDotsApi_v5 api = new ParallelDotsApi_v5();
 
     /**
      * pre: layout for this activity exists

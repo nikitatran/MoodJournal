@@ -10,6 +10,7 @@
 package cpsc4150.projects.journal.util;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 
 import cpsc4150.projects.journal.database.NoteRepository;
@@ -19,6 +20,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 
 import okhttp3.MultipartBody;
@@ -28,20 +33,14 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * ParallelDotsApi class handles the API call to ParallelDots that calculates emotions based off of
+ * ParallelDotsApi_v5 class handles the API call to ParallelDots that calculates emotions based off of
  * a given text.
  * Stores the calculated values into a note before the note is stored into the database
  *
  * Reference 1 used
  */
-public class ParallelDotsApi {
-    String api_key = "jFEcMS6z1DJ9Y2abzJO6tyQ3FarcVzp2LV5gAW9fz3o";
-    private double dBored;
-    private double dAngry;
-    private double dSad;
-    private double dFear;
-    private double dHappy;
-    private double dExcited;
+public class ParallelDotsApi_v5 {
+    private final String api_key = "jFEcMS6z1DJ9Y2abzJO6tyQ3FarcVzp2LV5gAW9fz3o";
 
     private Note note;
     private NoteRepository noteRepo;
@@ -49,7 +48,7 @@ public class ParallelDotsApi {
     /**
      * Empty constructor
      */
-    public ParallelDotsApi() {
+    public ParallelDotsApi_v5() {
 
     }
 
@@ -100,8 +99,7 @@ public class ParallelDotsApi {
             OkHttpClient client = new OkHttpClient();
 
             try {
-                Response response = client.newCall(request).execute();
-                return response;
+                return client.newCall(request).execute();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -117,30 +115,40 @@ public class ParallelDotsApi {
                         String jsonResponseString = emotionResponse.body().string();
                         JSONObject myObject = new JSONObject(jsonResponseString);
                         JSONObject emotion = myObject.getJSONObject("emotion");
-                        dBored = emotion.getDouble("indifferent");
-                        dBored *= 100.00;
 
-                        dAngry = emotion.getDouble("angry");
-                        dAngry *= 100.00;
+                        double bored = emotion.getDouble("indifferent");
+                        bored *= 100.00;
 
-                        dSad = emotion.getDouble("sad");
-                        dSad *= 100.00;
+                        double angry = emotion.getDouble("angry");
+                        angry *= 100.00;
 
-                        dFear = emotion.getDouble("fear");
-                        dFear *= 100.00;
+                        double sad = emotion.getDouble("sad");
+                        sad *= 100.00;
 
-                        dHappy = emotion.getDouble("happy");
-                        dHappy *= 100.00;
+                        double fear = emotion.getDouble("fear");
+                        fear *= 100.00;
 
-                        dExcited = emotion.getDouble("excited");
-                        dExcited *= 100.00;
+                        double happy = emotion.getDouble("happy");
+                        happy *= 100.00;
 
-                        note.setAngry(dAngry);
-                        note.setBored(dBored);
-                        note.setSad(dSad);
-                        note.setFear(dFear);
-                        note.setHappy(dHappy);
-                        note.setExcited(dExcited);
+                        double excited = emotion.getDouble("excited");
+                        excited *= 100.00;
+
+                        HashMap map = new HashMap<String, Double>();
+                        map.put("happy", happy);
+                        map.put("sad", sad);
+                        map.put("fear", fear);
+                        map.put("bored", bored);
+                        map.put("excited", excited);
+                        map.put("angry", angry);
+
+                        //https://stackoverflow.com/questions/5911174/finding-key-associated-with-max-value-in-a-java-map
+                        String prominentEmotion = Collections.max(map.entrySet(), Map.Entry.comparingByValue()).getKey().toString();
+
+                        note.setAll(happy, sad, bored, excited, angry, fear);
+                        note.setProminent_emotion(prominentEmotion);
+
+                        Log.d("note", note.toString());
 
                         noteRepo.updateNoteTask(note);
                     }
@@ -150,7 +158,6 @@ public class ParallelDotsApi {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
     }
 }
