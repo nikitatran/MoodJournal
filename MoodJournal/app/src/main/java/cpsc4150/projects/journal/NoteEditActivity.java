@@ -32,6 +32,7 @@ import com.projects.journal.R;
 import cpsc4150.projects.journal.database.async.AsyncResponse;
 import cpsc4150.projects.journal.models.Note;
 import cpsc4150.projects.journal.database.NoteRepository;
+import cpsc4150.projects.journal.util.LinedEditText;
 import cpsc4150.projects.journal.util.ParallelDotsApi;
 import cpsc4150.projects.journal.util.Utility;
 

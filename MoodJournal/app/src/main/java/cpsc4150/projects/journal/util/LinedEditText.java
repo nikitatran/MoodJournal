@@ -8,7 +8,7 @@
         1. https://codingwithmitch.com/courses/sqlite-room-persistence-android/drawing-parallel-lines-edittext/
  */
 
-package cpsc4150.projects.journal;
+package cpsc4150.projects.journal.util;
 
 import android.content.Context;
 import android.graphics.Canvas;

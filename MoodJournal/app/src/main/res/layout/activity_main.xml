@@ -34,7 +34,7 @@
             app:tabMaxWidth="0dp" />
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
+    <cpsc4150.projects.journal.tabs.CustomSwipeDirectionViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

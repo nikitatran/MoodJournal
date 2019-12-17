@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import cpsc4150.projects.journal.DetailsActivity;
-import cpsc4150.projects.journal.LinedEditText;
+import cpsc4150.projects.journal.util.LinedEditText;
 import com.projects.journal.R;
 import cpsc4150.projects.journal.models.Note;
 

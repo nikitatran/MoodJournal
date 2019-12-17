@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <cpsc4150.projects.journal.LinedEditText
+            <cpsc4150.projects.journal.util.LinedEditText
                 android:id="@+id/note_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
